@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/* =IE8, IE7 style fixes
+--------------------------------------------------------------------------------------------------------*/
+.ie8 .title:before, .hover-title:before {display:none; }
+
+.ie7 .social li { display:inline; }
+.ie7 #options ul { display:inline;}
+/* End Fixes
+--------------------------------------------------------------------------------------------------------*/

@@ -1,0 +1,26 @@
+#contact { display: block; width: auto; margin: 0; padding: 0px; border: none; margin-top:20px; overflow:visible }
+
+/* Form style */
+
+#contact label { display: none; float: none; height:0px; }
+input, textarea, select { width:220px; height:16px; padding:15px 0px; font: 14px Georgia, "Times New Roman", Times, serif; color:#555; border:0; border-bottom:1px solid #555; -webkit-transition: all 0.2s ease 0s; -moz-transition: all 0.2s ease 0s; -o-transition: all 0.2s ease 0s; transition: all 0.2s ease 0s; float:none; display:block; margin:0px 40px; font-style:italic;}
+#contact textarea { margin-bottom:0px; margin-right:0px !important; }
+input:focus, textarea:focus, select:focus {  }
+input.submit { display:inline-block; position:absolute; width:auto; bottom:40px; right:0px; border:0px; padding:0px; color:#8d8d8d; font-size:12px; background:none; cursor:pointer}
+#contact input.submit:hover { color:#555; }
+
+
+#contact fieldset { padding-left:0px;}
+
+#contact span.required { padding-left:28px; background:url(../images/bg-bullet.png) no-repeat 12px 5px; margin-left:-28px; }
+
+#message { margin: 0; padding: 0px; z-index:200; position:absolute !important; top:40px; left:40px; background:#fff; height:auto; width:220px; }
+#success_page h3 {font-size:15px; font-weight:600; padding:34px 40px 0 40px; margin-bottom:-6px; }
+#success_page p {position:relative !important; padding-bottom:35px;  font-style:italic;}
+
+.error_message { display: block; width:180px; height:auto; padding:19px 20px 19px 20px; background: #FBE3E4; color:#8a1f11;  font-style:italic; }
+
+.loader { display:none; }
+
+#contact .padding-right {padding-right:20px; }
+#comments {height: 85px; }

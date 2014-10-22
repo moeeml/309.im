@@ -1,0 +1,214 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* =Clearfix
+--------------------------------------------------------------------------------------------------------*/
+.clear { clear: both; }
+.clearfix:after { content: "."; display:block; height:0; clear:both; visibility:hidden; }/* ----- clear fix for floats ----- */
+.clearfix { display:inline-block; }
+* html .clearfix { height:1%; }/* hides clearfix from IE-mac */
+.clearfix { display:block; }/* end hide from IE-mac */
+.alignleft { float:left; }
+.alignright { float:right; }
+.aligncenter { margin:auto; display:block; }
+.alignnone { clear:both; font-size:0; line-height:0; margin:0; padding:0; border:0; height:0; width:0; }
+.centered { text-align:center; }
+/* End Clearfix
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Preloader
+--------------------------------------------------------------------------------------------------------*/
+#preloader { position:absolute; top:0; left:0; right:0; bottom:0; background-color:#000; z-index:99; }
+#status { width:200px; height:200px; position:absolute; left:50%; top:50%; background-image:url(../images/ajax-loader.gif); background-repeat:no-repeat; background-position:center; margin:-100px 0 0 -100px; }
+/* End Preloader
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Typography
+--------------------------------------------------------------------------------------------------------*/
+html {overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
+body { font: 14px Georgia, "Times New Roman", Times, serif; color:#555; background:#000; }
+strong { font-weight:bold; }
+a, a > * {-webkit-transition: all 0.2s ease 0s; -moz-transition: all 0.2s ease 0s; -o-transition: all 0.2s ease 0s; transition: all 0.2s ease 0s; }
+p { line-height:1.5; font-style:italic; padding:14px 40px 0 40px; }
+p.small {font-size:12px;}
+p.blockquote { font-family:Georgia, "Times New Roman", Times, serif; font-style:italic; font-weight:bold; padding:24px 60px 10px 60px; clear:both }
+.blockquote span {font: 11px 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif; color:#8d8d8d; padding-top:5px; text-transform:uppercase; display:block; letter-spacing:1px; }
+a { color:#8d8d8d; text-decoration:none; }
+a:hover { text-decoration:none; color:#555; }
+span.arrow {font:13px 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif; }
+/* End Typography
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Headings
+--------------------------------------------------------------------------------------------------------*/
+h1#logo { position:relative; float:left; margin-top:39px; margin-left:10px; margin-bottom:40px; width:182px; height:21px; z-index:1 }
+h1#logo a { display:block; background:url(../images/bg-logo.png) no-repeat; background-size:182px 21px; width:182px; height:21px; text-indent:-9999px; }
+h2, h3, h4 { line-height:1.5; font-family:'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif; }
+h2 { font-size:18px; font-weight:700; color:#2b2b2b; margin:0px 40px 5px 40px; padding-bottom:19px; padding-top:32px; text-transform:uppercase; letter-spacing:2px; border-bottom:1px solid #555; display:block }
+h4 {font-size:15px; font-weight:600; padding:14px 40px 0 40px; margin-bottom:-6px; }
+/* End Headings
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Main Content
+--------------------------------------------------------------------------------------------------------*/
+#wrapper { margin-top:0px; width:100%; background:#0b0b0b; position:relative; z-index:29; margin:0 auto; margin-bottom:20px; }
+.container { padding:0px; width:960px; position:relative; margin:0 auto;}
+.col1-1 { width:940px; margin:10px; height:402px; float:left; }
+.col1-3 { width:300px; height:402px; margin:10px; float:left; }
+.element .col1-3 {width:300px; height:402px; margin:0; float:left; }
+.element .col1-3.connect {width:320px; height:402px; margin:0; float:left; }
+.col2-3 { width:620px; height:402px; margin:10px; float:left; }
+.element .col2-3 {width:640px; height:402px; margin:0; }
+.col2-3.post, .col2-3.auto, .col1-3.auto, .col1-1.auto {height:auto; }
+.white-right:before {content:''; height:0; width:0; border-width:12px 12px 12px 12px; border-style:solid; border-color:rgba(251,251,251,0) rgba(255,255,255,1) rgba(255,255,255,0) rgba(255,255,255,0); position:absolute; margin-top:40px; left:616px; }
+.white-right2:before {content:''; height:0; width:0; border-width:12px 12px 12px 12px; border-style:solid; border-color:rgba(251,251,251,0) rgba(255,255,255,1) rgba(255,255,255,0) rgba(255,255,255,0); position:absolute; margin-top:40px; left:296px; }
+.white-bottom:before {content:''; height:0; width:0; border-width:12px 12px 12px 12px; border-style:solid; border-color:rgba(251,251,251,0) rgba(255,255,255,0) rgba(255,255,255,1) rgba(255,255,255,0); position:absolute; top:-24px; margin-left:40px; }
+.white-right, .white-right2 {background:#fff; }
+.white-bottom {background:#fff; position:relative; height:246px; }
+.post .white-bottom {height:auto; padding-bottom:40px; }
+.bottom {position:absolute; bottom:0px; padding-bottom:36px; }
+.break { height:20px; position:relative; }
+.images { display:block; position:relative; }
+.overflow {overflow:hidden; }
+/* =End Main Content
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Twitter
+--------------------------------------------------------------------------------------------------------*/
+#twitter_update_list { background:#fff; }
+ul.jta-tweet-list li { display:block; min-height:100px; padding:14px 40px 0px 40px; font-style:italic; line-height:1.5 }
+ul.jta-tweet-list li a.jta-tweet-link { color:#8d8d8d; text-decoration:none; text-transform:none; margin-right:4px; line-height:20px; }
+ul.jta-tweet-list li a.jta-tweet-link:hover { text-decoration:none; color:#555; }
+ul.jta-tweet-list li a.jta-tweet-timestamp-link { font-size:12px !important; color:#8d8d8d; text-decoration:none; padding-top:5px; display:block; }
+ul.jta-tweet-list li a.jta-tweet-timestamp-link:hover { text-decoration:none; color:#555; }
+span.jta-tweet-twitter-bird-icon, span.jta-tweet-twitter-bird-icon:hover { display:none }
+a.jta-tweet-a { color:#8d8d8d; text-decoration:none; }
+a.jta-tweet-a:hover { color:#555; }
+/* End Twitter
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Googlemaps
+--------------------------------------------------------------------------------------------------------*/
+#map {width:620px; height:620px; margin:0; border:0}
+#map:before, #map:after {background: none; content: ''; left: 0;	position: absolute;	top: 0;	width: 100%; }
+#map:after {bottom: 0; top: auto; }
+/* End Googlemaps
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Image Hover
+--------------------------------------------------------------------------------------------------------*/
+.images img {width:100%; display: block; z-index:9 }
+
+.icons { position:absolute; right:40px; top:40px; height:58px; width:58px; margin-left:0px; z-index:100 }
+.email {background:url(../images/bg-email.png) no-repeat; background-size:24px 24px; }
+.xing {background:url(../images/bg-xing.png) no-repeat; background-size:24px 24px; }
+.google {background:url(../images/bg-googleplus.png) no-repeat; background-size:24px 24px; }
+.tweat {background:url(../images/bg-tweat.png) no-repeat; background-size:24px 24px; } 
+.twitter {background:url(../images/bg-twitter.png) center no-repeat #fff; background-size:32px 32px; } 
+.facebook {background:url(../images/bg-facebook.png) no-repeat; background-size:24px 24px; }
+.pinterest {background:url(../images/bg-pinterest.png) no-repeat; background-size:24px 24px; }
+.instagram {background:url(../images/bg-instagram.png) no-repeat; background-size:24px 24px; }
+.vimeo {background:url(../images/bg-vimeo.png) no-repeat; background-size:24px 24px; }
+.skype {background:url(../images/bg-skype.png) no-repeat; background-size:24px 24px; }
+.dribble {background:url(../images/bg-dribble.png) no-repeat; background-size:24px 24px; }
+.link {background:url(../images/bg-link.png) center no-repeat #fff; background-size:24px 24px; }
+.video {background:url(../images/bg-video.png) center no-repeat #fff; background-size:24px 24px; }
+.bubble {background:url(../images/bg-bubble.png) center no-repeat #fff; background-size:24px 24px; }
+.quote {background:url(../images/bg-heart.png) center no-repeat #fff; background-size:24px 24px; }
+.slideshow {background:url(../images/bg-slideshow.png) center no-repeat #fff; background-size:28px 15px; }
+.aside {background:url(../images/bg-aside.png) center no-repeat #fff; background-size:23px 23px; }
+.close {background:url(../images/bg-close.png) center no-repeat #fff; background-size:18px 18px; }
+
+.images .title, .images .subtitle { z-index:10; position:absolute; top:38px; left:40px; width:auto; font-weight:600; }
+.images .subtitle { top: 60px; font-weight: 400; }
+.title-wrap, .subtitle-wrap { overflow: hidden; position: relative; }
+.title-wrap h3, .subtitle-wrap p { overflow: hidden; white-space: nowrap; line-height:32px; text-transform:uppercase; font-family:'Open Sans', Arial, Helvetica, sans-serif; color:#2b2b2b; padding:0px; }
+.title-wrap h3 span, .subtitle-wrap p span { padding:5px 8px 6px 8px; background:#fff; -webkit-box-shadow:0 1px 0 rgba(0, 0, 0, 0.05); -moz-box-shadow:0 1px 0 rgba(0, 0, 0, 0.05) ; box-shadow:0 1px 0 rgba(0, 0, 0, 0.05); font-style:normal; }
+.subtitle-wrap p span {font-size:12px; padding:5px 8px 5px 8px; }
+
+/*.videos {width:100%; height:402px; display:block; z-index:9 }*/
+/* End Image Hover
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Blog
+--------------------------------------------------------------------------------------------------------*/
+
+/* End Blog
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Lists
+--------------------------------------------------------------------------------------------------------*/
+ul.list { position:absolute; padding:0 20px 16px 20px; bottom:0 }
+ul.list li { line-height:1.5; font-size:22px; font-weight:300; letter-spacing:-1px; width:auto; padding-left:28px; }
+ul.check li { background:url(../images/bg-check.png) no-repeat 1px 13px; background-size:13px 11px; }
+/* =End Lists
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Footer
+--------------------------------------------------------------------------------------------------------*/
+footer { height:130px; padding:0px 0 0 0px; margin-top:20px; background:#0b0b0b; padding-bottom:100px; position:relative  }
+/* End Footer
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Social
+--------------------------------------------------------------------------------------------------------*/
+ul.social { padding-top:37px; margin-bottom:6px; letter-spacing:0; }
+.social li { display:inline-block; margin:0px 6px;}
+.social li a { display:block; -webkit-transition: all 0.3s ease 0s; -moz-transition: all 0.3s ease 0s; -o-transition: all 0.3s ease 0s; transition: all 0.3s ease 0s; }
+ul.social a {text-indent:-9000px; text-decoration:none; height:24px; width:24px;}
+/* End Social
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Isotope
+--------------------------------------------------------------------------------------------------------*/
+.isotope-item { z-index: 2; }
+.isotope-hidden.isotope-item { pointer-events: none; z-index: 1; }
+/**** Isotope CSS3 transitions ****/
+.isotope, .isotope .isotope-item { -webkit-transition-duration: 0.8s; -moz-transition-duration: 0.8s; -ms-transition-duration: 0.8s; -o-transition-duration: 0.8s; transition-duration: 0.8s; }
+.isotope { -webkit-transition-property: height, width; -moz-transition-property: height, width; -ms-transition-property: height, width; -o-transition-property: height, width; transition-property: height, width; }
+.isotope .isotope-item { -webkit-transition-property: -webkit-transform, opacity; -moz-transition-property:    -moz-transform, opacity; -ms-transition-property:     -ms-transform, opacity; -o-transition-property:         top, left, opacity; transition-property:         transform, opacity; }
+/**** disabling Isotope CSS3 transitions ****/
+.isotope.no-transition, .isotope.no-transition .isotope-item, .isotope .isotope-item.no-transition { -webkit-transition-duration: 0s; -moz-transition-duration: 0s; -ms-transition-duration: 0s; -o-transition-duration: 0s; transition-duration: 0s; }
+/* End: Recommended Isotope styles */
+
+/* disable CSS transitions for containers with infinite scrolling*/
+.isotope.infinite-scrolling { -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none; transition: none; }
+
+
+#options { width:auto; height:100px; z-index:300; text-align:right;}
+#options ul { margin: 0; list-style: none; display:inline-block; padding-top:36px; float:right; margin-right:-7px; }
+#options li { float: left;  }
+#options li a { color:#555; font-family: "Open Sans", Arial, Helvetica, sans-serif; font-size:12px; font-weight:normal; text-decoration:none; text-transform:uppercase; display:inline-block; padding:5px 17px;  margin:0px; }
+#options li a:hover, #options li a.selected { color:#fff;}
+/* End Isotope
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Backtotop
+--------------------------------------------------------------------------------------------------------*/
+#backtotop { height:auto; position:fixed; right:30px; bottom:30px; display:none; z-index:30; }
+#backtotop ul { padding:15px 0px; }
+#backtotop ul li a { background:url(../images/bg-up.png) center 48% no-repeat #fff; background-size:22px 15px; display:block; width:50px; height:50px; float:right; right:10px; text-indent:-9000px; -webkit-box-shadow:0 0 30px rgba(0, 0, 0, 0.1); -moz-box-shadow:0 0 30px rgba(0, 0, 0, 0.1); box-shadow:0 0 30px rgba(0, 0, 0, 0.1);}
+#backtotop ul li a:hover { -webkit-box-shadow:0 0 30px rgba(0, 0, 0, 0); -moz-box-shadow:0 0 30px rgba(0, 0, 0, 0); box-shadow:0 0 30px rgba(0, 0, 0, 0); }
+/* End Backtotop
+--------------------------------------------------------------------------------------------------------*/
+
+
+/* =Update 1.0.1
+--------------------------------------------------------------------------------------------------------*/
+a:visited .white-bottom:before, a:visited .white-right:before, a:visited .white-right2:before { border-color: #fff !important; }
+/* End Update
+--------------------------------------------------------------------------------------------------------*/
+
