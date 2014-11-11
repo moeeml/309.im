@@ -16,20 +16,36 @@ class IndexController extends Controller {
         $this->display();
     }
 
-    public function get_article_list()
+    /**
+     * @desc 文章列表
+     * @version 1 2014-11-11 RGray
+     */
+    public function article_list()
     {
-    	$article_list = $this->article->select();
+    	$article_list = $this->article->list();
     	
     	$this->ajaxReturn($article_list);
     }
 
-    public function get_article_detail()
+    /**
+     * @desc 文章详细内容
+     * @version 1 2014-11-11 RGray
+     */
+    public function article_detail()
     {
     	$art_id = I('art_id');
-    	//$condition['art_id'] = $art_id; 
-    	$article = $this->article->where(array('id'=>$art_id))->find();
-    	$article['content'] = $this->media->where(array('art_id'=>$art_id,'type'=>1))->getField('description');
+
+    	$article = $this->article->detail($art_id);
 
     	$this->ajaxReturn($article);
+    }
+
+    /**
+     * @desc 发布文章
+     * @version 1 2014-11-11 RGray
+     */
+    public function publish_article()
+    {
+
     }
 }
