@@ -3,5 +3,5 @@
 include_once('define.php');
 
 return array(
-	'app_end'=>array('Common\Behavior\BuildHeaderBehavior'),
+	'action_begin'=>array('Common\Behavior\BuildHeaderBehavior'),
 );
