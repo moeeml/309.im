@@ -29,27 +29,27 @@ class ArticleModel extends Model {
 
     	foreach ($media as $m) {
     		switch ($m['type']) {
-    			case TEXT_TYPE:
+    			case TEXT:
     				$info['content'] = $m['description'];
     				break;
 
-    			case IMAGE_TYPE:
+    			case IMAGE:
     				$info['image'][] = $m;
     				break;
 
-    			case MUSIC_TYPE:
+    			case MUSIC:
     				$info['music'][] = $m;
     				break;
 
-    			case VIDEO_TYPE:
+    			case VIDEO:
     				$info['video'][] = $m;
     				break;
 
-    			case ANNEX_TYPE:
+    			case ANNEX:
     				$info['annex'][] = $m;
     				break;
 
-    			case CODE_TYPE:
+    			case CODE:
     				$info['code'][] = $m;	
     			
     			default:
