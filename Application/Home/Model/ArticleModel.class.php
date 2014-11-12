@@ -12,7 +12,7 @@ class ArticleModel extends Model {
      * @return array
      * @version 1 2014-11-11 RGray
      */
-    public function list()
+    public function get_list()
     {
     	return $this->where(array('status'=>NORMAL))->select();
     }
@@ -23,7 +23,7 @@ class ArticleModel extends Model {
      * @return array
      * @version 1 2014-11-11 RGray
      */
-    public function detail($id){
+    public function get_detail($id){
     	$info = $this->where(array('id'=>$id))->find();
     	$media = D('Media')->where(array('art_id'=>$id))->select();
 

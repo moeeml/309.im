@@ -22,7 +22,7 @@ class IndexController extends Controller {
      */
     public function article_list()
     {
-    	$article_list = $this->article->list();
+    	$article_list = $this->article->get_list();
     	
     	$this->ajaxReturn($article_list);
     }
@@ -35,7 +35,7 @@ class IndexController extends Controller {
     {
     	$art_id = I('art_id');
 
-    	$article = $this->article->detail($art_id);
+    	$article = $this->article->get_detail($art_id);
 
     	$this->ajaxReturn($article);
     }
