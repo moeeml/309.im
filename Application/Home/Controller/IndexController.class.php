@@ -46,6 +46,10 @@ class IndexController extends Controller {
      */
     public function publish_article()
     {
+        $res = $this->article->insert_article();
 
+        echo $this->article->getError();
+
+        $this->ajaxReturn($res);
     }
 }
