@@ -12,11 +12,14 @@ define('CODE', 'CODE');		//代码
 define('NORMAL', 'NORMAL');		//正常
 define('CLOSED', 'CLOSED');		//关闭
 define('HIDDEN', 'HIDDEN');		//隐藏
-define('DELETED', 'DELETED');		//删除
+define('DELETED', 'DELETED');	//删除
 
 //错误码
-define('SUCCESS', 1);		//成功
-define('ERROR', 0);			//错误
+define('SUCCESS', 'SUCCESS');		//成功
+define('ERROR', 'ERROR');			//错误
+
+//返回类型
+define('DATA', 'DATA');		//结果集	
 
 //页码
 define('PAGESIZE8', 8);

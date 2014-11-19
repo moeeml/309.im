@@ -1,15 +1,13 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
-class IndexController extends Controller {
+use Common\Controller\iController;
+class IndexController extends iController {
 	public $article = NULL;
-	public $media = NULL;
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->article = D('Article');
-		$this->media = D('Media');
 	}
 
     public function index(){
@@ -46,10 +44,18 @@ class IndexController extends Controller {
      */
     public function publish_article()
     {
-        $res = $this->article->insert_article();
+        if(!$this->article->insert_article()){
+            $this->type = ERROR;
+            $this->message = $this->article->message;
+        }else{
+            $this->data = L('publish_article_success', array('insert_id'=>$res));
+        }
 
-        echo $this->article->getError();
+        $this->json_back();
+    }
 
-        $this->ajaxReturn($res);
+    public function test()
+    {
+        $this->display();
     }
 }

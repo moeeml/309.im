@@ -6,13 +6,13 @@ class ArticleModel extends Model {
     /**
      * @var array 字段合法性限制
      */
-    protected $insertFields = array('cate_id', 'tag', 'type', 'keyword', 'description', 'title');
+    protected $insertFields = array('cate_id', 'tag', 'type', 'keyword', 'summary', 'title');
 
     /**
      * @var array 数据过滤以及自动填充
      */
     protected $_auto = array(
-            array('cate_id', 'intval', self::MODEL_BOTH, 'function'),
+            array('cate_id', 0, self::MODEL_INSERT),
             array('type', TEXT, self::MODEL_INSERT),
             array('status', NORMAL, self::MODEL_INSERT),
             array('create_time', 'time', self::MODEL_INSERT, 'function'),
@@ -29,11 +29,23 @@ class ArticleModel extends Model {
     /**
      * @var bool 批量验证
      */
-    protected $pathValidate = true;
+    protected $patchValidate = true;
+
+    /**
+     * @var mix message
+     */
+    public $message;
+
+    /**
+     * @var MediaModel Media模型对象
+     */
+    public $mediaModel = NULL;
 
     public function __construct()
     {
         parent::__construct();
+
+        $this->mediaModel = D('Media');
     }
 
     /**
@@ -56,7 +68,7 @@ class ArticleModel extends Model {
     public function get_detail($id)
     {
     	$info = $this->where(array('id'=>$id))->find();
-    	$media = D('Media')->where(array('art_id'=>$id))->select();
+    	$media = $this->mediaModel->where(array('art_id'=>$id))->select();
 
     	foreach ($media as $m) {
     		switch ($m['type']) {
@@ -99,11 +111,40 @@ class ArticleModel extends Model {
      */
     public function insert_article()
     {
+        //创建数据
         if(!$this->create()){
-            return false;
-        }else{
-            $this->user_id = 1;
-            return $this->add(); 
+            $article_error = $this->getError();
         }
+
+        if(!$this->mediaModel->create()){
+            $media_error = $this->mediaModel->getError();
+        }
+
+        $this->message = array_filter(array_merge((array)$article_error, (array)$media_error));
+
+        if(!empty($this->message)){    
+            return false;
+        }
+
+        //插入文章信息
+        $this->user_id = 1;
+        $res = $this->add();
+
+        if(!$res){
+            return false;
+        }
+
+        //插入文章媒体
+        if(!$this->mediaModel->add()){
+            return false;
+        }
+
+        return $res;
+    }
+
+    //Test
+    public function test()
+    {
+        $this->display();
     }
 }
