@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\iController;
-class IndexController extends iController {
+class ArticleController extends iController {
 	public $article = NULL;
 
 	public function __construct()
@@ -20,9 +20,9 @@ class IndexController extends iController {
      */
     public function article_list()
     {
-    	$article_list = $this->article->get_list();
+    	$this->data = $this->article->get_list();
     	
-    	$this->ajaxReturn($article_list);
+    	$this->json_back();
     }
 
     /**
@@ -32,10 +32,9 @@ class IndexController extends iController {
     public function article_detail()
     {
     	$art_id = I('art_id');
+    	$this->data = $this->article->get_detail($art_id);
 
-    	$article = $this->article->get_detail($art_id);
-
-    	$this->ajaxReturn($article);
+        $this->json_back();
     }
 
     /**
