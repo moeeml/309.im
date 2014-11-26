@@ -21,12 +21,6 @@ return array(
 	'VAR_LANGUAGE'     	=> 'l',
 
 	//路由
-	'URL_MODEL' 		=> '2',
+	'URL_MODEL' 		=> 2,
 	'URL_ROUTER_ON'   	=> true,
-
-	'URL_ROUTE_RULES'=>array(
-		'article-list'		=>	'Article/article_list',
-		'article/:id'		=>	array('Article/article_detail',array('art_id'=>':1')),
-		'article-publish'	=>	'Article/publish_article',
-	),
 );
