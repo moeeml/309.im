@@ -31,7 +31,7 @@ class ArticleController extends iController {
      */
     public function article_detail()
     {
-    	$art_id = I('art_id');
+    	$art_id = I('post.art_id');
     	$this->data = $this->article->get_detail($art_id);
 
         $this->json_back();
