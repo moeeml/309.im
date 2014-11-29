@@ -6,7 +6,7 @@ class MediaModel extends Model {
     /**
      * @var array 字段合法性限制
      */
-    protected $insertFields = array('art_id', 'comm_id', 'type', 'description', 'link', 'width', 'height');
+    protected $insertFields = array('comm_id', 'type', 'description', 'link', 'width', 'height');
 
     /**
      * @var array 数据过滤以及自动填充

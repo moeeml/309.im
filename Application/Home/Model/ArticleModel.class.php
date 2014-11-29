@@ -68,9 +68,12 @@ class ArticleModel extends Model {
     public function get_detail($id)
     {
     	$info = $this->where(array('id'=>$id))->find();
-    	$media = $this->mediaModel->where(array('art_id'=>$id))->select();
+
+        $mfield = 'id,description,link,type,status,limit,width,height,size';
+    	$media = $this->mediaModel->where(array('art_id'=>$id))->field($mfield)->select();
 
     	foreach ($media as $m) {
+
     		switch ($m['type']) {
     			case TEXT:
     				$info['content'] = $m['description'];
@@ -94,7 +97,8 @@ class ArticleModel extends Model {
 
     			case CODE:
     				$info['code'][] = $m;	
-    			
+    			    break;
+
     			default:
     				$info['media'][] = $m;
     				break;
@@ -135,6 +139,8 @@ class ArticleModel extends Model {
         }
 
         //插入文章媒体
+        $this->mediaModel->art_id = $res;
+
         if(!$this->mediaModel->add()){
             return false;
         }
