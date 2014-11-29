@@ -1,12 +1,25 @@
-<form action="/Home/art-pub" method="post">
+<form action="/Home/art-pub" method="post" enctype="multipart/form-data">
   Title:<input type="text" name="title" />
   <br/>
    Tag:<input type="text" name="tag" />
   <br/>
   Desc:<input type="text" name="description" />
   <br/>
+  File:<input type="file" name="item[]" /><br/>
+  File:<input type="file" name="item[]" /><br/>
+  File:<input type="file" name="item[]" /><br/>
+  File:<input type="file" name="item[]" /><br/>
+  File:<input type="file" name="item[]" /><br/>
+  File:<input type="file" name="item[]" /><br/>
   <input type="submit" value="SUB" />
 </form>
+
+<form action="/Home/art-pub" method="post">
+  id:<input type="text" name="user_id" />
+  <br/>
+  <input type="submit" value="SUB" />
+</form>
+
 
 <form action="/Home/art" method="post">
   Atr_id:<input type="text" name="art_id" />

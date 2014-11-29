@@ -43,11 +43,13 @@ class ArticleController extends iController {
      */
     public function publish_article()
     {
-        if(!$this->article->insert_article()){
+        $act_id = $this->article->insert_article();
+
+        if(!$act_id){
             $this->type = ERROR;
             $this->message = $this->article->message;
         }else{
-            $this->data = L('publish_article_success', array('insert_id'=>$res));
+            $this->data = L('publish_article_success', array('insert_id'=>$act_id));
         }
 
         $this->json_back();

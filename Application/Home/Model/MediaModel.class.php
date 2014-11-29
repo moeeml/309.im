@@ -4,11 +4,6 @@ use Think\Model;
 class MediaModel extends Model {
 
     /**
-     * @var array 字段合法性限制
-     */
-    protected $insertFields = array('comm_id', 'type', 'description', 'link', 'width', 'height');
-
-    /**
      * @var array 数据过滤以及自动填充
      */
     protected $_auto = array(
@@ -32,5 +27,27 @@ class MediaModel extends Model {
 
     public function __construct(){
         parent::__construct();
+    }
+
+    /**
+     * @desc 处理文件上传
+     * @return mix
+     * @version 1 2014-11-29 RGray
+     */
+    public function is_upload()
+    {
+        if(empty($_FILES)){return true;}
+
+        $config = array(
+                'maxSize'    =>    3145728,
+                'savePath'   =>    UPLOAD_PATH.ARTICLE_PATH.IMAGES_PATH,
+                'saveName'   =>    array('uniqid',''),
+                'exts'       =>    array('jpg', 'gif', 'png', 'jpeg'),
+                'autoSub'    =>    true,
+                'subName'    =>    array('date','Ymd'),
+            );
+
+        $upload = new \Think\Upload($config);
+        return $upload->upload();
     }
 }
