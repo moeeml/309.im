@@ -8,7 +8,7 @@ class MediaModel extends Model {
      */
     protected $_auto = array(
             array('comm_id', 0, self::MODEL_INSERT),
-            array('type', TEXT, self::MODEL_INSERT),
+            //array('type', TEXT, self::MODEL_INSERT),
             array('status', NORMAL, self::MODEL_INSERT),
             array('create_time', 'time', self::MODEL_INSERT, 'function'),
         );
@@ -35,12 +35,14 @@ class MediaModel extends Model {
      * @version 1 2014-11-29 RGray
      */
     public function is_upload()
-    {
-        if(empty($_FILES)){return true;}
+    {   
+        $desc = I('post.description');
+        $art_id = I('post.art_id');
 
         $config = array(
                 'maxSize'    =>    3145728,
-                'savePath'   =>    UPLOAD_PATH.ARTICLE_PATH.IMAGES_PATH,
+                'rootPath'   =>    './'.UPLOAD_PATH,
+                'savePath'   =>    './'.ARTICLE_PATH.IMAGE_PATH,
                 'saveName'   =>    array('uniqid',''),
                 'exts'       =>    array('jpg', 'gif', 'png', 'jpeg'),
                 'autoSub'    =>    true,
@@ -48,6 +50,41 @@ class MediaModel extends Model {
             );
 
         $upload = new \Think\Upload($config);
-        return $upload->upload();
+        $up_res = $upload->upload();
+
+        if(!$up_res) {
+            $this->error = $upload->getError();
+            return false;
+        }
+        
+        $i = 0;
+        $res = true;
+        $add_res = true;
+        $add_info = array();
+        $item = NULL;
+        $item->art_id = $art_id;
+
+        foreach ($up_res as $r) {
+            $savepath = str_replace('./', '', $r['savepath']);
+            $item->link = UPLOAD_PATH.$savepath.$r['savename'];
+            $item->description = $desc[$i];
+            $item->type = IMAGE;
+
+            if(!$this->create($item)){
+                return false;
+            }
+
+            $up_res[$i]['savepath'] = $item->link;
+            $add_info[] = $add_res = $this->add();
+            $res = $add_res && $res;
+
+            $i++;
+        }
+
+        if($res){
+            return $up_res;
+        }
+
+        return false;  
     }
 }

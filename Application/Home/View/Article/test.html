@@ -1,18 +1,34 @@
-<form action="/Home/art-pub" method="post" enctype="multipart/form-data">
+<form action="/Home/art-pub" method="post">
   Title:<input type="text" name="title" />
   <br/>
    Tag:<input type="text" name="tag" />
   <br/>
   Desc:<input type="text" name="description" />
   <br/>
-  File:<input type="file" name="item[]" /><br/>
-  File:<input type="file" name="item[]" /><br/>
-  File:<input type="file" name="item[]" /><br/>
-  File:<input type="file" name="item[]" /><br/>
-  File:<input type="file" name="item[]" /><br/>
-  File:<input type="file" name="item[]" /><br/>
   <input type="submit" value="SUB" />
 </form>
+
+
+
+<form action="/Home/media-up" method="post" enctype="multipart/form-data">
+<input type="hidden" name="art_id" value="1" />
+  File:<input type="file" name="image[]" />
+  Desc:<input type="text" name="description[]" />
+  <br/>
+  File:<input type="file" name="image[]" />
+  Desc:<input type="text" name="description[]" />
+  <br/>
+  <input type="submit" value="SUB" />
+</form>
+
+
+
+
+
+
+
+
+
 
 <form action="/Home/art-pub" method="post">
   id:<input type="text" name="user_id" />

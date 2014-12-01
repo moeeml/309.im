@@ -5,5 +5,6 @@ return array(
 		'art-list'		=>	'Article/article_list',
 		'art'			=>	'Article/article_detail',
 		'art-pub'		=>	'Article/publish_article',
+		'media-up'		=>	'Article/upload_media',
 	),
 );

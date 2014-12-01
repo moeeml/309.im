@@ -106,13 +106,10 @@ class ArticleModel extends Model {
     /**
      * @desc 写入文章内容
      * @return mix
-     * @version 2 2014-11-29 RGray
+     * @version 3 2014-12-1 RGray
      */
     public function insert_article()
     {
-        //处理上传文件
-        $item = $this->mediaModel->is_upload();
-
         //创建数据
         $ares = $this->create();
         $bres = $this->mediaModel->create();
@@ -132,7 +129,7 @@ class ArticleModel extends Model {
             return false;
         }
 
-        //插入文章媒体
+        //插入文章媒体信息
         $this->mediaModel->art_id = $art_id;
 
         if(!$this->mediaModel->add()){

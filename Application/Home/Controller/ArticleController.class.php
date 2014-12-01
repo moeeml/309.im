@@ -3,11 +3,13 @@ namespace Home\Controller;
 use Common\Controller\iController;
 class ArticleController extends iController {
 	public $article = NULL;
+    public $media = NULL;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->article = D('Article');
+        $this->article = D('Article');
+		$this->media = D('Media');
 	}
 
     public function index(){
@@ -50,6 +52,25 @@ class ArticleController extends iController {
             $this->message = $this->article->message;
         }else{
             $this->data = L('publish_article_success', array('insert_id'=>$act_id));
+        }
+
+        $this->json_back();
+    }
+
+
+    /**
+     * @desc 上传多媒体
+     * @version 1 2014-12-1 RGray
+     */
+    public function upload_media()
+    {
+        $res = $this->media->is_upload();
+        
+        if(!$res){
+            $this->type = ERROR;
+            $this->message = $this->media->getError();
+        }else{
+            $this->data = $res;
         }
 
         $this->json_back();
