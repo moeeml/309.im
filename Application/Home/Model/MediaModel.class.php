@@ -8,7 +8,6 @@ class MediaModel extends Model {
      */
     protected $_auto = array(
             array('comm_id', 0, self::MODEL_INSERT),
-            //array('type', TEXT, self::MODEL_INSERT),
             array('status', NORMAL, self::MODEL_INSERT),
             array('create_time', 'time', self::MODEL_INSERT, 'function'),
         );
