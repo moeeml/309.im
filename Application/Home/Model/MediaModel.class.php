@@ -40,7 +40,7 @@ class MediaModel extends Model {
 
         $config = array(
                 'maxSize'    =>    3145728,
-                'rootPath'   =>    './'.UPLOAD_PATH,
+                'rootPath'   =>    '.'.UPLOAD_PATH,
                 'savePath'   =>    './'.ARTICLE_PATH.IMAGE_PATH,
                 'saveName'   =>    array('uniqid',''),
                 'exts'       =>    array('jpg', 'gif', 'png', 'jpeg'),
