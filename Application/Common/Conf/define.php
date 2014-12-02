@@ -29,8 +29,3 @@ define('PAGESIZE24', 24);
 //存储路径
 define('UPLOAD_PATH', '/Public/upload/');	//公共存放位置
 define('ARTICLE_PATH', 'article/');			//文章模块存放位置
-define('IMAGE_PATH', 'image/');			//图片存放位置
-define('VIDEO_PATH', 'video/');				//视频存放位置
-define('MUSIC_PATH', 'music/');				//音频存放位置
-define('CODE_PATH', 'code/');				//代码存放位置
-define('ANNEX_PATH', 'annex/');				//附件存放位置

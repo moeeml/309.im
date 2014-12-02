@@ -9,7 +9,6 @@
 </form>
 
 
-
 <form action="/Home/media-up" method="post" enctype="multipart/form-data">
 <input type="hidden" name="art_id" value="1" />
   File:<input type="file" name="image[]" />
@@ -23,11 +22,22 @@
 
 
 
-
-
-
-
-
+<form action="/Home/media-up" method="post" enctype="multipart/form-data">
+<input type="hidden" name="art_id" value="1" />
+  File:<input type="file" name="image[]" />
+  Desc:<input type="text" name="description[]" />
+  Link:<input type="text" name="link[]" />
+  WIDTH:<input type="text" name="width[]" />
+  HEIGHT:<input type="text" name="height[]" />
+  <br/>
+  File:<input type="file" name="image[]" />
+  Desc:<input type="text" name="description[]" />
+  Link:<input type="text" name="link[]" />
+  WIDTH:<input type="text" name="width[]" />
+  HEIGHT:<input type="text" name="height[]" />
+  <br/>
+  <input type="submit" value="SUB" />
+</form>
 
 
 <form action="/Home/art-pub" method="post">

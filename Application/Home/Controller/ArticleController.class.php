@@ -12,7 +12,8 @@ class ArticleController extends iController {
 		$this->media = D('Media');
 	}
 
-    public function index(){
+    public function index()
+    {
         $this->display();
     }
 
