@@ -114,4 +114,13 @@ class UserController extends iController
 
 		$this->json_back();
 	}
+
+	/**
+	 * @desc 添加用户头像
+	 * @version 1 2014-12-03 RGray
+	*/
+	public function add_avatar()
+	{
+
+	}
 }
