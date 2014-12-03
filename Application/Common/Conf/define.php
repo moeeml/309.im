@@ -1,5 +1,8 @@
 <?php
 
+//秘钥
+define('ENCRYPT_KEY',	'233us');
+
 //媒体类型
 define('TEXT', 'TEXT');		//文本
 define('IMAGE', 'IMAGE');	//图片

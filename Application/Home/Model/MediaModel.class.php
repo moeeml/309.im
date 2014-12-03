@@ -1,4 +1,7 @@
 <?php
+/**
+ * @desc 媒体模型
+*/
 namespace Home\Model;
 use Think\Model;
 class MediaModel extends Model {

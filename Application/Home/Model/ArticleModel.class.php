@@ -1,4 +1,7 @@
 <?php
+/**
+ * @desc 文章模型
+*/
 namespace Home\Model;
 use Think\Model;
 class ArticleModel extends Model {

@@ -1,54 +1,44 @@
-<form action="/Home/art-pub" method="post">
-  Title:<input type="text" name="title" />
-  <br/>
-   Tag:<input type="text" name="tag" />
-  <br/>
-  Desc:<input type="text" name="description" />
-  <br/>
-  <input type="submit" value="SUB" />
+REGISTER:
+<br/>
+<form action="/Home/register" method="post" enctype="multipart/form-data">
+	Name:<input type="text" name="name" />
+	Pass:<input type="text" name="password" />
+	<input type="submit" name="sub" />
+</form>
+
+LOGIN:
+<br/>
+<form action="/Home/login" method="post" enctype="multipart/form-data">
+	Name:<input type="text" name="name" />
+	Pass:<input type="text" name="password" />
+	<input type="submit" name="sub" />
 </form>
 
 
-<form action="/Home/media-up" method="post" enctype="multipart/form-data">
-<input type="hidden" name="art_id" value="1" />
-  File:<input type="file" name="image[]" />
-  Desc:<input type="text" name="description[]" />
-  <br/>
-  File:<input type="file" name="image[]" />
-  Desc:<input type="text" name="description[]" />
-  <br/>
-  <input type="submit" value="SUB" />
+CHECKNAME:
+<br/>
+<form action="/Home/name-check" method="post" enctype="multipart/form-data">
+	Name:<input type="text" name="name" />
+	<input type="submit" name="sub" />
+</form>
+
+
+USERINFO VIEW:
+<br/>
+<form action="/Home/uinfo-view" method="post" enctype="multipart/form-data">
+	<input type="submit" name="sub" />
+</form>
+
+USERINFO EDIT:
+<br/>
+<form action="/Home/uinfo-edit" method="post" enctype="multipart/form-data">
+	Name:<input type="text" name="name" />
+	Pass:<input type="text" name="password" />
+	Sign:<input type="text" name="sign" />
+	Work:<input type="text" name="work" />
+	Alipay:<input type="text" name="alipay" />
+	<input type="submit" name="sub" />
 </form>
 
 
 
-<form action="/Home/media-up" method="post" enctype="multipart/form-data">
-<input type="hidden" name="art_id" value="1" />
-  File:<input type="file" name="image[]" />
-  Desc:<input type="text" name="description[]" />
-  Link:<input type="text" name="link[]" />
-  WIDTH:<input type="text" name="width[]" />
-  HEIGHT:<input type="text" name="height[]" />
-  <br/>
-  File:<input type="file" name="image[]" />
-  Desc:<input type="text" name="description[]" />
-  Link:<input type="text" name="link[]" />
-  WIDTH:<input type="text" name="width[]" />
-  HEIGHT:<input type="text" name="height[]" />
-  <br/>
-  <input type="submit" value="SUB" />
-</form>
-
-
-<form action="/Home/art-pub" method="post">
-  id:<input type="text" name="user_id" />
-  <br/>
-  <input type="submit" value="SUB" />
-</form>
-
-
-<form action="/Home/art" method="post">
-  Atr_id:<input type="text" name="art_id" />
-  <br/>
-  <input type="submit" value="SUB2" />
-</form>

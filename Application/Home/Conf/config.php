@@ -1,14 +1,20 @@
 <?php
 return array(
 	//输入过滤
-	'DEFAULT_FILTER'  =>  'urldecode,strip_tags,stripslashes,htmlspecialchars',
+	'DEFAULT_FILTER'  =>  'urldecode,strip_tags,stripslashes,htmlspecialchars,trim',
 
 	//路由规则
 	'URL_ROUTE_RULES'=>array(
+		'test'			=>	'Article/test',
 		'art-list'		=>	'Article/article_list',
 		'art'			=>	'Article/article_detail',
 		'art-pub'		=>	'Article/publish_article',
 		'media-up'		=>	'Article/upload_media',
+		'login'			=>	'User/login',
+		'name-check'	=>	'User/check_username_unique',
+		'register'		=>	'User/register',
+		'uinfo-view'	=>	'User/view_userinfo',
+		'uinfo-edit'	=>	'User/edit_userinfo',
 	),
 
 	//上传允许类型

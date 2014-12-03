@@ -1,15 +1,26 @@
 <?php
+/**
+ * @desc 博文模块
+*/
 namespace Home\Controller;
 use Common\Controller\iController;
-class ArticleController extends iController {
-	public $article = NULL;
-    public $media = NULL;
+class ArticleController extends iController
+{
+    /**
+     * @var ArticleModel 文章模型
+     */
+    private $articleModel = NULL;
+    
+    /**
+     * @var MediaModel 媒体模型
+     */
+    private $mediaModel = NULL;
 
 	public function __construct()
 	{
 		parent::__construct();
-        $this->article = D('Article');
-		$this->media = D('Media');
+        $this->articleModel = D('Article');
+		$this->mediaModel = D('Media');
 	}
 
     public function index()
@@ -21,9 +32,9 @@ class ArticleController extends iController {
      * @desc 文章列表
      * @version 1 2014-11-11 RGray
      */
-    public function article_list()
+    public function articleModel_list()
     {
-    	$this->data = $this->article->get_list();
+    	$this->data = $this->articleModel->get_list();
     	
     	$this->json_back();
     }
@@ -32,10 +43,10 @@ class ArticleController extends iController {
      * @desc 文章详细内容
      * @version 1 2014-11-11 RGray
      */
-    public function article_detail()
+    public function articleModel_detail()
     {
     	$art_id = I('post.art_id');
-    	$this->data = $this->article->get_detail($art_id);
+    	$this->data = $this->articleModel->get_detail($art_id);
 
         $this->json_back();
     }
@@ -44,15 +55,15 @@ class ArticleController extends iController {
      * @desc 发布文章
      * @version 1 2014-11-11 RGray
      */
-    public function publish_article()
+    public function publish_articleModel()
     {
-        $act_id = $this->article->insert_article();
+        $act_id = $this->articleModel->insert_articleModel();
 
         if(!$act_id){
             $this->type = ERROR;
-            $this->message = $this->article->message;
+            $this->message = $this->articleModel->message;
         }else{
-            $this->data = L('publish_article_success', array('insert_id'=>$act_id));
+            $this->data = L('publish_articleModel_success', array('insert_id'=>$act_id));
         }
 
         $this->json_back();
@@ -63,13 +74,13 @@ class ArticleController extends iController {
      * @desc 上传多媒体
      * @version 1 2014-12-1 RGray
      */
-    public function upload_media()
+    public function upload_mediaModel()
     {
-        $res = $this->media->is_upload();
+        $res = $this->mediaModel->is_upload();
         
         if(!$res){
             $this->type = ERROR;
-            $this->message = $this->media->getError();
+            $this->message = $this->mediaModel->getError();
         }else{
             $this->data = $res;
         }
