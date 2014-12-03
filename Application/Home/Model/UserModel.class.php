@@ -151,6 +151,8 @@ class UserModel extends Model{
 	{
 		$id = $this->get_uid();
 
+		if(empty($id)){return array();}
+
 		$base_info = $this->where(array('id'=>$id))->find();
 		$extra_info = $this->userInfoModel->where(array('id'=>$id))->find();
 
