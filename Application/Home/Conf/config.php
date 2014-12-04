@@ -15,6 +15,8 @@ return array(
 		'register'		=>	'User/register',
 		'uinfo-view'	=>	'User/view_userinfo',
 		'uinfo-edit'	=>	'User/edit_userinfo',
+		'avatar-up'		=>	'User/add_avatar',
+		'img-resize'	=>	'Image/resize_image',
 	),
 
 	//上传允许类型

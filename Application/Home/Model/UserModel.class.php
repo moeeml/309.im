@@ -23,6 +23,11 @@ class UserModel extends Model{
      */
     protected $userInfoModel = NULL;
 
+    /**
+     * @var MediaModel 媒体模型
+     */
+    public $mediaModel = NULL;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -191,5 +196,36 @@ class UserModel extends Model{
 		$this->where(array('id'=>$id))->save();
 		$this->userInfoModel->where(array('id'=>$id))->save();
 		return true;
+	}
+
+	/**
+	 * @desc 上传用户头像
+	 * @return mix
+	 * @version 1 2014-12-04 RGray
+	*/
+	public function update_avatar()
+	{
+		$user_id = $this->get_uid();
+
+		//上传图片
+		$this->mediaModel = D('media');
+		$config = $this->mediaModel->trans_upload_config();
+		$config['savePath'] = './'.AVATAR_PATH;
+		$upload = new \Think\Upload($config);
+		$up_res = $upload->upload();
+
+		if(!$up_res){
+			$this->error = $upload->getError();
+			return false;
+		}
+
+		//录入数据
+		$data['avatar'] = UPLOAD_PATH.str_replace('./', '', $up_res[0]['savepath']).$up_res[0]['savename'];
+
+		if(!$this->create($data)){
+			return false;
+		}
+
+		return $this->where(array('id'=>$user_id))->save();
 	}
 }

@@ -32,3 +32,4 @@ define('PAGESIZE24', 24);
 //存储路径
 define('UPLOAD_PATH', '/Public/upload/');	//公共存放位置
 define('ARTICLE_PATH', 'article/');			//文章模块存放位置
+define('AVATAR_PATH', 'user/avatar/');			//文章模块存放位置

@@ -32,7 +32,7 @@ class ArticleController extends iController
      * @desc 文章列表
      * @version 1 2014-11-11 RGray
      */
-    public function articleModel_list()
+    public function article_list()
     {
     	$this->data = $this->articleModel->get_list();
     	
@@ -43,7 +43,7 @@ class ArticleController extends iController
      * @desc 文章详细内容
      * @version 1 2014-11-11 RGray
      */
-    public function articleModel_detail()
+    public function article_detail()
     {
     	$art_id = I('post.art_id');
     	$this->data = $this->articleModel->get_detail($art_id);
@@ -55,9 +55,9 @@ class ArticleController extends iController
      * @desc 发布文章
      * @version 1 2014-11-11 RGray
      */
-    public function publish_articleModel()
+    public function publish_article()
     {
-        $act_id = $this->articleModel->insert_articleModel();
+        $act_id = $this->articleModel->insert_article();
 
         if(!$act_id){
             $this->type = ERROR;
@@ -74,7 +74,7 @@ class ArticleController extends iController
      * @desc 上传多媒体
      * @version 1 2014-12-1 RGray
      */
-    public function upload_mediaModel()
+    public function upload_media()
     {
         $res = $this->mediaModel->is_upload();
         

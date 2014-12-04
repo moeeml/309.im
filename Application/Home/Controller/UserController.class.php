@@ -121,6 +121,15 @@ class UserController extends iController
 	*/
 	public function add_avatar()
 	{
+		$res = $this->userModel->update_avatar();
 
+		if(!$res){
+			$this->type = ERROR;
+			$this->message = $this->userModel->getError();
+		}else{
+			$this->data = L('avatar_upload_success');
+		}
+
+		$this->json_back();
 	}
 }
