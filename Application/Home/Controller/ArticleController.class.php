@@ -90,6 +90,8 @@ class ArticleController extends iController
 
     public function test()
     {
-        $this->display();
+        echo $ua = $_SERVER["HTTP_USER_AGENT"];
+        //print_r($ua);
+        //$this->display();
     }
 }
