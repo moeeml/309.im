@@ -36,7 +36,7 @@ class ArticleController extends iController
     {
     	$this->data = $this->articleModel->get_list();
     	
-    	$this->json_back();
+    	$this->play();
     }
 
     /**
@@ -48,7 +48,7 @@ class ArticleController extends iController
     	$art_id = I('post.art_id');
     	$this->data = $this->articleModel->get_detail($art_id);
 
-        $this->json_back();
+        $this->play();
     }
 
     /**
@@ -61,12 +61,12 @@ class ArticleController extends iController
 
         if(!$act_id){
             $this->type = ERROR;
-            $this->message = $this->articleModel->message;
+            $this->data = $this->articleModel->message;
         }else{
             $this->data = L('publish_articleModel_success', array('insert_id'=>$act_id));
         }
 
-        $this->json_back();
+        $this->play();
     }
 
 
@@ -80,18 +80,16 @@ class ArticleController extends iController
         
         if(!$res){
             $this->type = ERROR;
-            $this->message = $this->mediaModel->getError();
+            $this->data = $this->mediaModel->getError();
         }else{
             $this->data = $res;
         }
 
-        $this->json_back();
+        $this->play();
     }
 
     public function test()
     {
-        echo $ua = $_SERVER["HTTP_USER_AGENT"];
-        //print_r($ua);
-        //$this->display();
+        $this->display();
     }
 }

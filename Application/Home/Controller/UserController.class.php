@@ -39,13 +39,13 @@ class UserController extends iController
 
 		if(!$res){
 			$this->type = ERROR;
-			$this->message = $this->userModel->message;
+			$this->data = $this->userModel->message;
 		}else{
 			$this->data = L('login_success');
 			$this->userModel->log_userinfo(array('user_id'=>$res));
 		}
 
-		$this->json_back();
+		$this->play();
 	}
 
 	/**
@@ -58,12 +58,12 @@ class UserController extends iController
 
 		if(!$res){
 			$this->type = ERROR;
-			$this->message = L('name_exist');
+			$this->data = L('name_exist');
 		}else{
 			$this->data = L('name_enable');
 		}
 
-		$this->json_back();
+		$this->play();
 	}
 
 	/**
@@ -76,13 +76,13 @@ class UserController extends iController
 
 		if(!$res){
 			$this->type = ERROR;
-			$this->message = $this->userModel->getError();
+			$this->data = $this->userModel->getError();
 		}else{
 			$this->data = L('register_success');
 			$this->userModel->log_userinfo(array('user_id'=>$res));
 		}
 
-		$this->json_back();
+		$this->play();
 	}
 
 	/**
@@ -94,7 +94,7 @@ class UserController extends iController
 		$this->type = DATA;
 		$this->data = $this->userModel->get_userinfo_detail();
 
-		$this->json_back();
+		$this->play();
 	}
 
 	/**
@@ -107,12 +107,12 @@ class UserController extends iController
 
 		if(!$res){
 			$this->type = ERROR;
-			$this->message = $this->userModel->message;
+			$this->data = $this->userModel->message;
 		}else{
 			$this->data = L('userinfo_update_success');
 		}
 
-		$this->json_back();
+		$this->play();
 	}
 
 	/**
@@ -125,11 +125,11 @@ class UserController extends iController
 
 		if(!$res){
 			$this->type = ERROR;
-			$this->message = $this->userModel->getError();
+			$this->data = $this->userModel->getError();
 		}else{
 			$this->data = L('avatar_upload_success');
 		}
 
-		$this->json_back();
+		$this->play();
 	}
 }

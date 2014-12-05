@@ -26,25 +26,38 @@ class iController extends Controller {
 	}
 
     /**
+     * @desc 判断客户端类型，返回不同格式数据
+     * @version 2 2014-12-05 RGray
+     */
+    public function play()
+    {
+        if(strpos($_SERVER["HTTP_USER_AGENT"], 'Windows NT')){
+            $this->html_back();
+        }else{
+            $this->json_back();
+        }
+    }
+
+    /**
      * @desc 返回json格式结果集
-     * @param string $type 结果集类型
-     * @param mix $data 结果集
-     * @version 1 2014-11-19 RGray
+     * @version 2 2014-12-05 RGray
      */
     public function json_back()
     {
         $result['flag'] = $this->type;
-
-        switch ($this->type) {
-            case ERROR:
-            $result['message'] = $this->message;
-            break;
-        default:
-            $result['data'] = $this->data;
-            break;
-        }
-
+        $result['data'] = $this->data;
         exit(json_encode($result));
+    }
+
+    /**
+     * @desc 返回html格式结果集
+     * @version 1 2014-12-05 RGray
+     */
+    public function html_back()
+    {
+        $this->assign('flag', $this->type);
+        $this->assign('data', $this->data);
+        $this->display();
     }
 
 }

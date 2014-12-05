@@ -39,11 +39,17 @@ class ArticleModel extends Model {
      */
     public $mediaModel = NULL;
 
+    /**
+     * @var UserModel User模型对象
+     */
+    public $userModel = NULL;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->mediaModel = D('Media');
+        $this->userModel = D('User');
     }
 
     /**
@@ -54,7 +60,10 @@ class ArticleModel extends Model {
      */
     public function get_list()
     {
-    	return $this->where(array('status'=>NORMAL))->select();
+        return $this->alias('a')
+                    ->field('a.*, u.real_name, u.avatar')
+                    ->join('LEFT JOIN user AS u ON u.id = a.user_id')
+                    ->where(array('status'=>NORMAL))->select();
     }
 
     /**
@@ -65,7 +74,10 @@ class ArticleModel extends Model {
      */
     public function get_detail($id)
     {
-    	$info = $this->where(array('id'=>$id))->find();
+    	$info = $this->alias('a')
+                     ->field('a.*, u.real_name, u.avatar, u.honor, u.tag, u.sign, u.description')
+                     ->join('LEFT JOIN user AS u ON u.id = a.user_id')
+                     ->where(array('a.id'=>$id))->find();
 
         $mfield = 'id,description,link,type,status,limit,width,height,size';
     	$media = $this->mediaModel->where(array('art_id'=>$id))->field($mfield)->select();
