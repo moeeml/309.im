@@ -34,8 +34,11 @@ class ArticleController extends iController
      */
     public function article_list()
     {
-    	$this->data = $this->articleModel->get_list();
-    	
+        $page = I('param.page', 1, 'intval');
+        $this->assign('page', $page + 1);
+
+        $this->data = $this->articleModel->get_list();
+
     	$this->play();
     }
 
@@ -45,7 +48,7 @@ class ArticleController extends iController
      */
     public function article_detail()
     {
-    	$art_id = I('post.art_id');
+    	$art_id = I('param.art_id');
     	$this->data = $this->articleModel->get_detail($art_id);
 
         $this->play();

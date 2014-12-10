@@ -1022,14 +1022,18 @@ blockquote cite:before {
 ----------------------------------------------- */
 .audio-wrapper {
     width: 450px;
+    height: 30px;
     position: relative;
     margin-bottom: 20px;
 }
 .audio {
-    width: 293px;
+    width: 100%;
     position: absolute;
     right: 0;
     top: 3px;
+}
+.audio audio{
+    width: 450px;
 }
 .vinyl {
     margin-bottom: 0;
