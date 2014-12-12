@@ -67,6 +67,15 @@ class UserController extends iController
 	}
 
 	/**
+	 * @desc 显示用户注册页
+	 * @version 1 2014-12-12 RGray
+	*/
+	public function show_resgister()
+	{
+		$this->play();
+	}
+
+	/**
 	 * @desc 用户注册
 	 * @version 1 2014-12-03 RGray
 	*/
@@ -79,7 +88,6 @@ class UserController extends iController
 			$this->data = $this->userModel->getError();
 		}else{
 			$this->data = L('register_success');
-			$this->userModel->log_userinfo(array('user_id'=>$res));
 		}
 
 		$this->play();

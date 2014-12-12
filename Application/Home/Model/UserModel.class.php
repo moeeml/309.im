@@ -117,7 +117,7 @@ class UserModel extends Model{
 	/**
 	 * @desc 录入用户注册信息
 	 * @return mix
-	 * @version 1 2014-12-03 RGray
+	 * @version 2 2014-12-12 RGray
 	*/
 	public function insert_user()
 	{
@@ -142,7 +142,12 @@ class UserModel extends Model{
 		}
 
 		//录入数据
-		$this->userInfoModel->add(array('id'=>$ares));
+		$uid = $this->userInfoModel->add(array('id'=>$ares));
+
+		//初始化userinfo session
+		if(!empty($uid)){
+			session('user_info', array('user_id'=>$uid));
+		}
 
 		return true;
 	}
