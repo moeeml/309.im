@@ -1,0 +1,41 @@
+<include file="Public:header" />
+<div class="wrapper">
+	<!-- Begin Form -->
+	<div id="comment-form" class="comment-form box">
+	
+		<div id="respond">
+					<h3 id="reply-title">Post a Article</h3>
+					
+					<form action="/home/art-pub" method="post" id="">
+						<p>
+							<label for="title">Title</label>
+							<span class="required">*</span>
+							<input id="title" name="title" type="text" value="" size="30" />
+						</p>
+						<p>
+							<label for="tag">Tag</label>
+							<input id="tag" name="tag" type="text" value="" size="30" />
+						</p>
+						<p>
+							<label for="keyword">Keyword</label>
+							<input id="keyword" name="keyword" type="text" value="" size="30" />
+						</p>
+						<p>
+							<label for="summary">Summary</label>
+							<input id="summary" name="summary" type="text" value="" size="30" />
+						</p>											
+						<p>
+							<label for="content">Content</label>
+							<span class="required">*</span>
+							<textarea id="content" name="content" cols="45" rows="8" aria-required="true"></textarea>
+						</p>
+						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Post Article" />
+						</p>
+					</form>
+		</div><!-- #respond -->	
+  	
+	</div>
+	<!-- End Form -->
+</div>		
+<include file="Public:footer" />			

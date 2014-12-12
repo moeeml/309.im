@@ -23,11 +23,6 @@ class ArticleController extends iController
 		$this->mediaModel = D('Media');
 	}
 
-    public function index()
-    {
-        $this->display();
-    }
-
     /**
      * @desc 文章列表
      * @version 1 2014-11-11 RGray

@@ -1,0 +1,107 @@
+<include file="Public:header" />
+<script type="text/javascript" src="/Public/js/popwin.js"></script>
+<script>
+$(document).ready(function() {
+    $("#outside").on('click' , function(){
+		popWin.showWin("800","600","Avatar Upload","/Public/js/tpl/avatar-upload.html");
+	});
+});
+</script>
+<div class="wrapper">
+	<!-- Begin Form -->
+	<div id="comment-form" class="comment-form box">
+	
+		<div id="respond">
+					<h3 id="reply-title">User Information</h3>
+					<div class="avatar"><a id="outside"><img src="{$Think.session.user_info.avatar|default='/Public/images/akali.jpg'}"></div>
+					<form action="/home/uinfo-edit" method="post" id="">
+						<p>
+							<label for="honor">Honor/头衔</label>
+							<input id="honor" name="honor" type="text" value="{$data.honor}" size="30" />
+						</p>
+						<p>
+							<label for="tag">Tag/标签</label>
+							<input id="tag" name="tag" type="text" value="{$data.tag}" />
+						</p>
+						<p>
+							<label for="sign">Sign/签名</label>
+							<input id="sign" name="sign" type="text" value="{$data.sign}" />
+						</p>
+						<p>
+							<label for="description">Description/自我介绍</label>
+							<input id="description" name="description" type="text" value="{$data.description}" />
+						</p>
+						<p>
+							<label for="real_name">Name/昵称</label>
+							<input id="real_name" name="real_name" type="text" value="{$data.real_name}" />
+						</p>																	
+						<p>
+							<label for="work">Work/职业</label>
+							<input id="work" name="work" type="text" value="{$data.work}" />
+						</p>
+						<p>
+							<label for="bussiness">Bussiness/行业</label>
+							<input id="bussiness" name="bussiness" type="text" value="{$data.bussiness}" />
+						</p>																	
+						<p>
+							<label for="company">Company/公司</label>
+							<input id="company" name="company" type="text" value="{$data.company}" />
+						</p>																	
+						<p>
+							<label for="address">Address/现住地址</label>
+							<input id="address" name="address" type="text" value="{$data.address}" />
+						</p>																	
+						<p>
+							<label for="hometown">Hometown/家乡</label>
+							<input id="hometown" name="hometown" type="text" value="{$data.hometown}" />
+						</p>																	
+						<p>
+							<label for="birthday">Birthday/生日日期</label>
+							<notempty name="data.birthday">
+								<input id="birthday" name="birthday" type="text" value="{$data.birthday|date='Y/m/d',###}" />
+							<else />
+								<input id="birthday" name="birthday" type="text" value="" />
+							</notempty>
+						</p>																	
+						<p>
+							<label for="age">Age/年龄</label>
+							<input id="age" name="age" type="text" value="{$data.age}" />
+						</p>																	
+						<p>
+							<label for="like">Like/爱好</label>
+							<input id="like" name="like" type="text" value="{$data.like}" />
+						</p>																	
+						<p>
+							<label for="phone">Phone/电话</label>
+							<input id="phone" name="phone" type="text" value="{$data.phone}" />
+						</p>																	
+						<p>
+							<label for="qq">QQ</label>
+							<input id="qq" name="qq" type="text" value="{$data.qq}" />
+						</p>																	
+						<p>
+							<label for="email">Email/邮箱</label>
+							<input id="email" name="email" type="text" value="{$data.email}" />
+						</p>																	
+						<p>
+							<label for="alipay">Alipay/支付宝账号</label>
+							<input id="alipay" name="alipay" type="text" value="{$data.alipay}" />
+						</p>																	
+						<p>
+							<label for="tenpay">Tenpay/财付通账号</label>
+							<input id="tenpay" name="tenpay" type="text" value="{$data.tenpay}" />
+						</p>																	
+						<p>
+							<label for="bank">Bank/银行账号</label>
+							<input id="bank" name="bank" type="text" value="{$data.bank}" />
+						</p>																	
+						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Submit" style="opacity: 1;"/>
+						</p>
+					</form>
+		</div><!-- #respond -->	
+  	
+	</div>
+	<!-- End Form -->
+</div>		
+<include file="Public:footer" />			

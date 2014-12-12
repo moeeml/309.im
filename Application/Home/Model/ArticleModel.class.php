@@ -101,15 +101,20 @@ class ArticleModel extends Model {
      * @desc 获取文章的详细内容
      * @param int $id 文章ID
      * @return array
-     * @version 1 2014-11-11 RGray
+     * @version 2 2014-12-11 RGray
      */
     public function get_detail($id)
     {
     	$info = $this->alias('a')
-                     ->field('a.*, u.real_name, u.avatar, u.honor, u.tag, u.sign, u.description')
+                     ->field('a.*, u.real_name, u.avatar, u.honor, u.tag as utag, u.sign, u.description as user_desc')
                      ->join('LEFT JOIN user AS u ON u.id = a.user_id')
                      ->where(array('a.id'=>$id))->find();
 
+        //拆开标签                     
+        $tag = explode(',', $info['tag']);unset($info['tag']);$info['art_tag'] = $tag;
+        $utag = explode(',', $info['utag']);unset($info['utag']);$info['user_tag'] = $utag;                     
+
+        //查找对应媒体
         $mfield = 'id,description,link,type,status,limit,width,height,size';
     	$media = $this->mediaModel->where(array('art_id'=>$id))->field($mfield)->select();
 
@@ -119,26 +124,6 @@ class ArticleModel extends Model {
     			case TEXT:
     				$info['content'] = $m['description'];
     				break;
-
-    			case IMAGE:
-    				$info['images'][] = $m;
-    				break;
-
-    			case MUSIC:
-    				$info['musics'][] = $m;
-    				break;
-
-    			case VIDEO:
-    				$info['videos'][] = $m;
-    				break;
-
-    			case ANNEX:
-    				$info['annexs'][] = $m;
-    				break;
-
-    			case CODE:
-    				$info['codes'][] = $m;	
-    			    break;
 
     			default:
     				$info['media'][] = $m;

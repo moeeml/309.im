@@ -31,11 +31,15 @@ class iController extends Controller {
      */
     public function play()
     {
-        if(strpos($_SERVER["HTTP_USER_AGENT"], 'Windows NT')){
-            $this->html_back();
-        }else{
+        if(I('param.respon') == 'json'){
             $this->json_back();
         }
+
+        if(strpos($_SERVER["HTTP_USER_AGENT"], 'Windows NT') || I('param.respon') == 'html'){
+            $this->html_back();
+        }
+
+        $this->json_back();
     }
 
     /**
@@ -58,6 +62,7 @@ class iController extends Controller {
         $this->assign('flag', $this->type);
         $this->assign('data', $this->data);
         $this->display();
+        exit();
     }
 
 }

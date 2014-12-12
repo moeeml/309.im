@@ -6,7 +6,7 @@
 <!-- Begin Main Image -->
 	<div class="main-image">
 		<div class="outer">
-			<span class="inset"><img src="/Public/images/art/post1-full.jpg" alt="" /></span>
+			<span class="inset"><img src="{$data.image}" alt="" /></span>
 		</div>
 	</div>
 	<!-- End Main Image --> 
@@ -19,15 +19,19 @@
 		<div class="post format-image box"> 
 
 			<div class="details">
-				<span class="icon-image">September 26, 2012</span>
-				<span class="likes"><a href="#" class="likeThis">44</a></span>
-				<span class="comments"><a href="#">3</a></span>
+				<span class="icon-image">{$data.create_time|date="F j, Y, g:i a",###}</span>
+				<span class="likes"><a class="likeThis">{$data.reply}</a></span>
+				<span class="comments"><a>{$data.dig}</a></span>
 			</div>
 		
-			<h1 class="title">Morning Glory</h1>
-			<p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of autumn which I enjoy with my whole heart.</p>
+			<h1 class="title">{$data.title}</h1>
+			<p>{$data.content}</p>
 		
-			<div class="tags"><a href="#">journal</a>, <a href="#">photography</a> </div>	
+			<div class="tags">
+				<volist name="data.art_tag" id="atag">
+					<a href="/home/art-tag/{$atag}">#{$atag}</a>&nbsp;&nbsp;
+				</volist>
+			</div>	
 			
 			<div class="post-nav">
 				<span class="nav-prev"><a href="#">&larr; Rock Paper Scissors Lizard Spock</a></span>
@@ -50,7 +54,7 @@
 	      	<li class="comment">
 				<div class="comment">
 					<div class="comment-author vcard user frame">
-						<img alt="" src='http://1.gravatar.com/avatar/30b2dad884c817cb09ad5fa61dad7e44?s=70&amp;d=retro&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />
+						<img alt="" src='' class='avatar avatar-70 photo' height='70' width='70' />
 					</div>
 					<div class="message">
 						<span class="reply-link"><a class="comment-reply-link" href="#">Reply</a></span>
@@ -70,7 +74,7 @@
 			<li class="comment">
 				<div class="comment">
 					<div class="comment-author vcard user frame">
-						<img alt="" src='http://0.gravatar.com/avatar/2876eddf6bce8c3f8527990c2d115c99?s=70&amp;d=retro&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />
+						<img alt="" src='' class='avatar avatar-70 photo' height='70' width='70' />
 					</div>
 					<div class="message">
 						<span class="reply-link"><a class="comment-reply-link" href="#">Reply</a></span>
@@ -91,7 +95,7 @@
 						<li class="comment even depth-2" id="li-comment-5">
 							<div id="comment-5" class="com-wrap">
 								<div class="comment-author vcard user frame">
-									<img alt='' src='http://0.gravatar.com/avatar/6a81b453436b12149e7d6d109f4acb66?s=70&amp;d=retro&amp;r=G' class='avatar avatar-70 photo' height='70' width='70' />			</div><!-- .comment-author .vcard -->
+									<img alt='' src='' class='avatar avatar-70 photo' height='70' width='70' />			</div><!-- .comment-author .vcard -->
 								<div class="message">
 									<span class="reply-link"><a class='comment-reply-link' href='/obscura-wp/morning-glory/?replytocom=5#respond' onclick='return addComment.moveForm("comment-5", "5", "respond", "16")'>Reply</a></span>
 									<div class="info">
@@ -156,39 +160,29 @@
 
 <!-- Begin Sidebar -->
 <div class="sidebar box">
+  <notempty name="data.media">
   <div class="sidebox widget">
-			<h3 class="widget-title">Popular Posts</h3>
+			<h3 class="widget-title">Media with Post</h3>
 			<ul class="post-list">
+				<volist name="data.media" id="mitem">
 			  	<li> 
-			  		<div class="frame">
-			  			<a href="#"><img src="/Public/images/art/s1.jpg" /></a>
-			  		</div>
-					<div class="meta">
-					    <h6><a href="#">Charming Winter</a></h6>
-					    <em>28th Sep 2012</em>
-				    </div>
+			  			<if condition="$mitem.type eq 'IMAGE'">
+			  			<div class="frame">
+			  				<a href="{$mitem.link}"><img title="{$mitem.description}" src="{$mitem.link}?w=255" /></a>
+			  			</div>	
+			  			<elseif condition="$mitem.type eq 'MUSIC'"/>
+			  				<audio controls="" preload="none" src="{$mitem.link}"></audio>
+			  			<elseif condition="$mitem.type eq 'VIDEO'"/>
+			  			<div class="frame">
+			  				<iframe src="{$mitem.link}" width="255" height="173" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+						</div>			  				
+			  			</if>
 				</li>
-				<li> 
-			  		<div class="frame">
-			  			<a href="#"><img src="/Public/images/art/s2.jpg" /></a>
-			  		</div>
-					<div class="meta">
-					    <h6><a href="#">Trickling Stream</a></h6>
-					    <em>5th Sep 2012</em>
-				    </div>
-				</li>
-				<li> 
-			  		<div class="frame">
-			  			<a href="#"><img src="/Public/images/art/s3.jpg" /></a>
-			  		</div>
-					<div class="meta">
-					    <h6><a href="#">Morning Glory</a></h6>
-					    <em>26th Sep 2012</em>
-				    </div>
-				</li>
+				</volist>
 			</ul>
 			
 	</div>
+	</notempty>
 	
 	<div class="sidebox widget">
 		<h3 class="widget-title">Search</h3>

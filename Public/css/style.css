@@ -164,7 +164,7 @@ a.more {
 }
 a.button,
 .forms fieldset .btn-submit,
-#commentform input#submit {
+form input#submit {
     font-family: 'Open Sans Condensed', sans-serif;
     background: #f2f2f2 url(../images/button.png) repeat-x;
     height: 31px;
@@ -1527,4 +1527,24 @@ ul.flickr-feed li img {
     background: transparent url(../images/line.png) repeat-x left top;
     margin: 0;
     padding: 15px 0 0 0;
+}
+
+.button_head{
+    display:block;
+    overflow:hidden;
+    margin:0 auto;
+    width: 70px;
+    BORDER: #b5b5b5 1px solid; 
+    BACKGROUND: #ccc; 
+    FLOAT: right; 
+    RIGHT: 50px; 
+    BOTTOM: 50px;
+    POSITION:fixed;/*固定定位*/
+    _POSITION: absolute;/*兼容IE6*/
+    _TOP: expression(offsetParent.scrollTop+document.documentElement.clientHeight-this.offsetHeight);/*兼容IE6*/
+}
+
+.avatar img{
+    height: 200px;
+    margin: 0 20px 0 auto;
 }

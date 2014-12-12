@@ -63,7 +63,12 @@
 <div class="site-generator-wrapper">                                   
   <div class="site-generator">Copyright Obscura 2012. Design by <a href="http://elemisfreebies.com">elemis</a>. All Rights Reserved.Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></div>
 </div>
-<!-- End Footer --> 
+<notempty name="Think.session.user_info">
+<div class="button_head">
+  <a href="/home/uinfo-view"><img src="{$Think.session.user_info.avatar|default='/Public/images/akali.jpg'}"></a>
+</div>
+</notempty>
+<!-- End Footer -->
 <script type="text/javascript" src="/Public/js/scripts.js"></script>
 </body>
 </html>

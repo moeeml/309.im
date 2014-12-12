@@ -77,7 +77,7 @@ class UserModel extends Model{
 		$name = I('post.name');
 		$password = I('post.password');
 
-		$linfo = $this->field('id, name, password')->where(array('name'=>$name))->find();
+		$linfo = $this->field('id, name, password, avatar')->where(array('name'=>$name))->find();
 
 		//用户名不存在
 		if(empty($linfo)){
@@ -91,7 +91,7 @@ class UserModel extends Model{
 			return false;
 		}
 
-		return $linfo['id'];
+		return $linfo;
 	}
 
 	/**
@@ -168,7 +168,7 @@ class UserModel extends Model{
 	/**
 	 * @desc 更新用户信息
 	 * @return bool
-	 * @version 1 2014-12-03 RGray
+	 * @version 2 2014-12-11 RGray
 	*/
 	public function update_userinfo()
 	{
@@ -192,7 +192,8 @@ class UserModel extends Model{
 		}
 
 		//更新数据
-		$this->password = EncryptModel::enpass($this->password);
+		!empty($this->password) && $this->password = EncryptModel::enpass($this->password);
+		!empty($this->userInfoModel->birthday) && $this->userInfoModel->birthday = strtotime($this->userInfoModel->birthday);
 		$this->where(array('id'=>$id))->save();
 		$this->userInfoModel->where(array('id'=>$id))->save();
 		return true;
@@ -227,5 +228,44 @@ class UserModel extends Model{
 		}
 
 		return $this->where(array('id'=>$user_id))->save();
+	}
+
+	/**
+	 * @desc 刷新用户信息
+	 * @version 1 2014-12-12 RGray
+	*/
+	public function fresh_userinfo()
+	{
+		$user_info = $this->get_userinfo_detail();
+		$this->log_userinfo($user_info);
+	}
+
+	/**
+	 * @desc 裁剪用户头像
+	 * @return bool
+	 * @version 1 2014-12-12 RGray
+	*/
+	public function cutdown_avatar()
+	{
+		$user_info = $this->get_userinfo_detail();
+		$avatar = $user_info['avatar'];
+
+		if(empty($avatar)){
+			$this->error = L('avatar_empty');
+			return false;
+		}
+
+		$image = new \Think\Image();
+		$image->open('.'.$avatar);
+
+		$radio =  number_format($image->width() / I('param.width'), 1);
+		$crop_width = I('param.x2') * $radio;
+		$crop_height = I('param.y2') * $radio;
+		$origin_width = I('param.x') * $radio;
+		$origin_height = I('param.y') * $radio;
+
+		$image->crop($crop_width, $crop_height, $origin_width, $origin_height)->save('.'.$avatar);
+
+		return true;
 	}
 }
