@@ -61,7 +61,7 @@ class ArticleController extends iController
             $this->type = ERROR;
             $this->data = $this->articleModel->message;
         }else{
-            $this->data = L('publish_articleModel_success', array('insert_id'=>$act_id));
+            $this->data = L('publish_article_success', array('insert_id'=>$act_id));
         }
 
         $this->play();
