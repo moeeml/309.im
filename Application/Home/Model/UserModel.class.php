@@ -101,12 +101,14 @@ class UserModel extends iModel{
 
 	/**
 	 * @desc 检查用户名是否存在
+	 * @param string $name 用检查的用户名
+	 * @param bool $flag 是否检测昵称
 	 * @return bool
-	 * @version 2 2014-12-12 RGray
+	 * @version 3 2014-12-13 RGray
 	*/
-	public function check_name()
+	public function check_name($name, $flag = false)
 	{
-		$name = I('post.name');
+		empty($name) && $name = I('post.name');
 
 		if(!$this->check_param($name)){return false;}
 
@@ -116,7 +118,13 @@ class UserModel extends iModel{
 			$where['id'] = array('neq', $id);
 		}
 
-		$where['name'] = array('eq', $name);
+		//选择筛选用户账号或者用户名
+		if(!$flag){
+			$where['name'] = array('eq', $name);
+		}else{
+			$where['real_name'] = array('eq', $name);
+		}
+
 		$res = $this->field('id')->where($where)->find();
 
 		if(!empty($res)){
@@ -193,7 +201,7 @@ class UserModel extends iModel{
 		$id = $this->get_uid();
 
 		//检查用户名唯一
-		if(!$this->check_name()){
+		if(!$this->check_name(I('param.real_name'), true)){
 			$this->message = L('name_exist');
 			return false;
 		}
