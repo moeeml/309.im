@@ -67,6 +67,15 @@ class ArticleController extends iController
         $this->play();
     }
 
+    /**
+     * @desc 发布文章页
+     * @version 1 2014-12-12 RGray
+     */
+    public function show_publish_article()
+    {
+        $this->play();
+    }
+
 
     /**
      * @desc 上传多媒体

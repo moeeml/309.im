@@ -3,9 +3,9 @@
  * @desc 用户模型
 */
 namespace Home\Model;
-use Think\Model;
+use Common\Model\iModel;
 use Common\Model\encryptModel;
-class UserModel extends Model{
+class UserModel extends iModel{
     /**
      * @var array 自动验证
      */
@@ -77,6 +77,11 @@ class UserModel extends Model{
 		$name = I('post.name');
 		$password = I('post.password');
 
+		if(!$this->check_param(array($name, $password))){
+			$this->message = $this->getError();
+			return false;
+		}
+
 		$linfo = $this->field('id, name, password, avatar')->where(array('name'=>$name))->find();
 
 		//用户名不存在
@@ -97,11 +102,14 @@ class UserModel extends Model{
 	/**
 	 * @desc 检查用户名是否存在
 	 * @return bool
-	 * @version 1 2014-12-03 RGray
+	 * @version 2 2014-12-12 RGray
 	*/
 	public function check_name()
 	{
 		$name = I('post.name');
+
+		if(!$this->check_param($name)){return false;}
+
 		$id = $this->get_uid();
 
 		if($id){
@@ -111,7 +119,12 @@ class UserModel extends Model{
 		$where['name'] = array('eq', $name);
 		$res = $this->field('id')->where($where)->find();
 
-		return (bool)!$res;
+		if(!empty($res)){
+			$this->error = L('name_exist');
+			return false;
+		}
+
+		return true;
 	}
 
 	/**

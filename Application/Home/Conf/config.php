@@ -9,6 +9,7 @@ return array(
 		'art-list'		=>	'Article/article_list',
 		'art'			=>	'Article/article_detail',
 		'art-pub'		=>	'Article/publish_article',
+		'art4pub'		=>	'Article/show_publish_article',
 		'media-up'		=>	'Article/upload_media',
 		'login'			=>	'User/login',
 		'name-check'	=>	'User/check_username_unique',

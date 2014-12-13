@@ -162,6 +162,7 @@ class ArticleModel extends Model {
 
         //插入文章媒体信息
         $this->mediaModel->art_id = $art_id;
+        $this->mediaModel->type = TEXT;
 
         if(!$this->mediaModel->add()){
             return false;

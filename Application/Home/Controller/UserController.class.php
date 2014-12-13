@@ -50,7 +50,7 @@ class UserController extends iController
 
 	/**
 	 * @desc 检查用户名是否唯一
-	 * @version 1 2014-12-03 RGray
+	 * @version 2 2014-12-12 RGray
 	*/
 	public function check_username_unique()
 	{
@@ -58,7 +58,7 @@ class UserController extends iController
 
 		if(!$res){
 			$this->type = ERROR;
-			$this->data = L('name_exist');
+			$this->data = $this->userModel->getError();
 		}else{
 			$this->data = L('name_enable');
 		}

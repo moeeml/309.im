@@ -93,7 +93,16 @@
 
 <!-- Begin Page-navi -->
     <div id="navigation">
-      <div class="nav-previous"><a href="{$page}" ><span class="meta-nav-prev">&larr; Older posts</span></a></div>
+      <div class="nav-previous">
+        <if condition="$page eq 2">
+          <a href="{$Think.server.request_uri}/page/2">
+        <else />
+          <a href="{$page}">  
+        </if>
+        
+        <span class="meta-nav-prev">&larr; Older posts</span>
+        </a>
+      </div>
       <!-- 
       <div class="nav-next"><a href="#" ><span class="meta-nav-next">Newer posts &rarr;</span></a></div>
        --> 
