@@ -46,12 +46,13 @@ class MediaModel extends Model {
 
     /**
      * @desc 处理文件上传
+     * @param int $art_id 文章ID
      * @return mix
      * @version 1 2014-11-29 RGray
      */
-    public function is_upload()
+    public function is_upload($art_id = null)
     {   
-        $art_id = I('post.art_id');
+        empty($art_id) && $art_id = I('post.art_id');
         $desc = I('post.description');
         $link = array_filter(I('post.link'));
         $limit = I('post.limit');

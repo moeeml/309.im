@@ -6,7 +6,7 @@
 		<div id="respond">
 					<h3 id="reply-title">Post a Article</h3>
 					
-					<form action="/home/art-pub" method="post">
+					<form action="/home/art-pub" method="post" enctype="multipart/form-data">
 						<p>
 							<label for="title">Title</label>
 							<span class="required">*</span>
@@ -25,9 +25,29 @@
 							<input id="summary" name="summary" type="text" value="" size="30" />
 						</p>											
 						<p>
-							<label for="content">Content</label>
+							<label class="cont-lab" for="content">Content</label>
 							<span class="required">*</span>
+							<span class="media-upload-nav">
+								<a href="#" id="image-up"><img src="/Public/images/icon-image.png" /></a>
+								<a href="#" id="music-up"><img src="/Public/images/icon-audio.png" /></a>
+								<a href="#" id="video-up"><img src="/Public/images/icon-video.png" /></a>
+								<a href="#" id="annex-up"><img src="/Public/images/icon-link.png" /></a>
+							</span>
 							<textarea id="content" name="description" cols="45" rows="8" aria-required="true"></textarea>
+						</p>
+						<p class="cont-media">
+							<label>Media</label>
+							<span id="image-list"></span>
+							<input type="file" id="img-item" name="image[]" multiple="multiple"/>
+							<!--
+							<span id="music-list"></span>
+							<input type="file" name="music[]" multiple="multiple"/>
+							<span id="video-list"></span>
+							<input type="file" name="video[]" multiple="multiple"/>
+							<span id="annex-list"></span>
+							<input type="file" name="annex[]" multiple="multiple"/>
+							-->
+							<p class="clear"></p>
 						</p>
 						<p class="form-submit">
 							<input name="submit" type="submit" id="submit" value="Post Article" />
@@ -37,5 +57,36 @@
   	
 	</div>
 	<!-- End Form -->
-</div>		
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("#image-up").click(function(){
+			$("input[name='image[]']").click();
+			return false;
+		});
+	});
+
+	$("input[name='image[]']").change(preImg);
+
+	function preImg(source) {
+		var imgItem = document.getElementById('img-item');
+		var len = imgItem.files.length;
+
+	    if (typeof FileReader === 'undefined') {  
+	        alert('Your browser does not support FileReader...');  
+	        return;  
+	    }
+
+	    for(var i = 0; i < len; i++){
+		    var reader = new FileReader();  
+		    reader.readAsDataURL(imgItem.files[i]);
+		    reader.onload = function(){
+		    	$("#image-list").append('<img src="'+this.result+'"/>');
+		    }
+	    }
+
+	    $(".cont-media").show();
+
+	}  
+</script>		
 <include file="Public:footer" />			

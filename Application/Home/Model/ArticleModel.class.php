@@ -168,6 +168,8 @@ class ArticleModel extends Model {
             return false;
         }
 
+        $this->mediaModel->is_upload($art_id);
+
         return $art_id;
     }
 

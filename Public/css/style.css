@@ -1548,3 +1548,37 @@ ul.flickr-feed li img {
     height: 200px;
     margin: 0 20px 0 auto;
 }
+
+.comment-form .required, .cont-lab{
+    float: left;
+}
+
+.comment-form .media-upload-nav{
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.comment-form .media-upload-nav img{
+    float: left;
+    margin: 0 5px;
+}
+
+.comment-form .cont-media{
+    display: none;
+}
+
+.comment-form .cont-media input{
+    display: none;
+}
+
+.comment-form .cont-media span{
+    display: inline-block;
+    width: 100%;
+}
+
+.comment-form .cont-media span img{
+    float: left;
+    width: 100px;
+    margin: 5px;
+}
