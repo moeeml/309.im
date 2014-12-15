@@ -27,7 +27,7 @@ class iController extends Controller {
 
     /**
      * @desc 判断客户端类型，返回不同格式数据
-     * @version 2 2014-12-05 RGray
+     * @version 3 2014-12-15 RGray
      */
     public function play()
     {
@@ -35,7 +35,7 @@ class iController extends Controller {
             $this->json_back();
         }
 
-        if(strpos($_SERVER["HTTP_USER_AGENT"], 'Windows NT') || I('param.respon') == 'html'){
+        if(!strpos($_SERVER["HTTP_USER_AGENT"], 'Mobile') || I('param.respon') == 'html'){
             $this->html_back();
         }
 
