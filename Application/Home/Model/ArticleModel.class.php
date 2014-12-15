@@ -168,7 +168,12 @@ class ArticleModel extends Model {
             return false;
         }
 
-        $this->mediaModel->is_upload($art_id);
+        //媒体上传
+        $upres = $this->mediaModel->is_upload($art_id);
+
+        if(!empty($upres)){
+            $this->where(array('id'=>$art_id))->save(array('type'=>strtoupper($upres[0]['key'])));
+        }
 
         return $art_id;
     }
