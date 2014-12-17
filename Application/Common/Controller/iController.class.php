@@ -59,6 +59,12 @@ class iController extends Controller {
      */
     public function html_back()
     {
+        if($this->type == ERROR){
+            header("Content-Type: text/html;charset=utf-8");
+            echo $this->data;
+            exit();
+        }
+
         $this->assign('flag', $this->type);
         $this->assign('data', $this->data);
         $this->display();

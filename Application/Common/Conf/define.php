@@ -11,6 +11,10 @@ define('VIDEO', 'VIDEO');	//视频
 define('ANNEX', 'ANNEX');	//附件
 define('CODE', 'CODE');		//代码
 
+//媒体所属
+define('ARTICLE', 'ARTICLE');		//文章
+define('COMMENT', 'COMMENT');		//评论
+
 //状态码
 define('NORMAL', 'NORMAL');		//正常
 define('CLOSED', 'CLOSED');		//关闭

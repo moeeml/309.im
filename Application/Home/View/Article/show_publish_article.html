@@ -39,14 +39,6 @@
 							<label>Media</label>
 							<span id="image-list"></span>
 							<input type="file" id="img-item" name="image[]" multiple="multiple"/>
-							<!--
-							<span id="music-list"></span>
-							<input type="file" name="music[]" multiple="multiple"/>
-							<span id="video-list"></span>
-							<input type="file" name="video[]" multiple="multiple"/>
-							<span id="annex-list"></span>
-							<input type="file" name="annex[]" multiple="multiple"/>
-							-->
 							<p class="clear"></p>
 						</p>
 						<p class="form-submit">
@@ -60,33 +52,37 @@
 </div>
 <script type="text/javascript">
 	$(function(){
+
+		//Upload Image
 		$("#image-up").click(function(){
 			$("input[name='image[]']").click();
 			return false;
 		});
-	});
+	
 
-	$("input[name='image[]']").change(preImg);
+		$("input[name='image[]']").change(preImg);
 
-	function preImg(source) {
-		var imgItem = document.getElementById('img-item');
-		var len = imgItem.files.length;
+		function preImg(source) {
+			var imgItem = document.getElementById('img-item');
+			var len = imgItem.files.length;
 
-	    if (typeof FileReader === 'undefined') {  
-	        alert('Your browser does not support FileReader...');  
-	        return;  
-	    }
-
-	    for(var i = 0; i < len; i++){
-		    var reader = new FileReader();  
-		    reader.readAsDataURL(imgItem.files[i]);
-		    reader.onload = function(){
-		    	$("#image-list").append('<img src="'+this.result+'"/>');
+		    if (typeof FileReader === 'undefined') {  
+		        alert('Your browser does not support FileReader...');  
+		        return;  
 		    }
-	    }
 
-	    $(".cont-media").show();
+		    for(var i = 0; i < len; i++){
+			    var reader = new FileReader();  
+			    reader.readAsDataURL(imgItem.files[i]);
+			    reader.onload = function(){
+			    	$("#image-list").append('<img src="'+this.result+'"/>');
+			    }
+		    }
 
-	}  
+		    $(".cont-media").show();
+
+		}
+
+	});  
 </script>		
 <include file="Public:footer" />			

@@ -3,14 +3,15 @@
 <!-- Begin Wrapper -->
 <div class="wrapper">
 
-<!-- Begin Main Image -->
+	<notempty name="data.image">
+	<!-- Begin Main Image -->
 	<div class="main-image">
 		<div class="outer">
 			<span class="inset"><img src="{$data.image}" alt="" /></span>
 		</div>
 	</div>
 	<!-- End Main Image --> 
-
+	</notempty>
 
 <!-- Begin Container -->
 <div class="content">
@@ -48,22 +49,23 @@
 		  <!-- Begin Comments -->
 		  <div id="comments">
 	            
-			<h3 id="comments-title">3 Responses to "Morning Glory"</h3>
+			<h3 id="comments-title">Responses</h3>
 	    
 	        <ol id="singlecomments" class="commentlist">
+	      	<volist name="data.comment" id="item">
 	      	<li class="comment">
 				<div class="comment">
-					<div class="comment-author vcard user frame">
-						<img alt="" src='' class='avatar avatar-70 photo' height='70' width='70' />
+					<div class="comment-author vcard user">
+						<img alt="{$item.real_name}" src="{$item.avatar}" class='avatar avatar-70 photo' width='70' />
 					</div>
 					<div class="message">
-						<span class="reply-link"><a class="comment-reply-link" href="#">Reply</a></span>
+						<span class="reply-link"></span>
 						<div class="info">
-							<h2>Marshall Eriksen</h2>
-							<span class="meta">September 13, 2012 at 12:32 pm</span>
+							<h2>{$item.real_name}</h2>
+							<span class="meta">{$item.create_time|date='F j, Y, g:i a', ###}</span>
 						</div>
 						<div class="comment-body ">
-							<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla sed consectetur.</p>
+							<p>{$item.content}</p>
 						</div>
 						<span class="edit-link"></span>
 					</div>
@@ -71,48 +73,7 @@
 				</div>
 				<div class="clear"></div>
 			</li>
-			<li class="comment">
-				<div class="comment">
-					<div class="comment-author vcard user frame">
-						<img alt="" src='' class='avatar avatar-70 photo' height='70' width='70' />
-					</div>
-					<div class="message">
-						<span class="reply-link"><a class="comment-reply-link" href="#">Reply</a></span>
-						<div class="info">
-							<h2>Laura</h2>
-							<span class="meta">September 13, 2012 at 1:26 pm</span>
-						</div>
-						<div class="comment-body ">
-							<p>Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-						</div>
-						<span class="edit-link"></span>
-					</div>
-					<div class="clear"></div>
-				</div>
-				<div class="clear"></div>
-			
-					<ul class='children'>
-						<li class="comment even depth-2" id="li-comment-5">
-							<div id="comment-5" class="com-wrap">
-								<div class="comment-author vcard user frame">
-									<img alt='' src='' class='avatar avatar-70 photo' height='70' width='70' />			</div><!-- .comment-author .vcard -->
-								<div class="message">
-									<span class="reply-link"><a class='comment-reply-link' href='/obscura-wp/morning-glory/?replytocom=5#respond' onclick='return addComment.moveForm("comment-5", "5", "respond", "16")'>Reply</a></span>
-									<div class="info">
-										<h2>Jason</h2>					<span class="meta">
-											September 13, 2012 at 1:27 pm					</span><!-- .comment-meta .commentmetadata -->
-									</div>
-									<div class="comment-body ">
-										<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Curabitur blandit tempus porttitor.</p>
-									</div>
-													<span class="edit-link"></span>
-								</div>
-								<div class="clear"></div>
-							</div><!-- #comment-##  -->
-							<div class="clear"></div>
-						</li>
-					</ul>
-				</li>
+			</volist>
 			</ol>
 		</div>
 		<!-- End Comments -->
@@ -123,26 +84,28 @@
 			<div id="respond">
 						<h3 id="reply-title">Leave a Reply</h3>
 						
-						<form action="#" method="post" id="commentform">
-							<p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>
-							
-							<p class="comment-form-author">
-								<label for="author">Name</label> <span class="required">*</span>
-								<input id="author" name="author" type="text" value="" size="30" aria-required='true' />
-							</p>
-							<p class="comment-form-email">
-								<label for="email">Email</label> <span class="required">*</span>
-								<input id="email" name="email" type="text" value="" size="30" aria-required='true' />
-							</p>
-							<p class="comment-form-url">
-								<label for="url">Website</label>
-								<input id="url" name="url" type="text" value="" size="30" />
-							</p>
+						<form action="/home/art-reply" method="post" id="commentform" enctype="multipart/form-data">
 							<p class="comment-form-comment">
-								<label for="comment">Comment</label>
-								<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+								<label class="cont-lab" for="comment">Comment</label>
+								<span class="required">*</span>
+								<!--
+								<span class="media-upload-nav">
+									<a href="#" id="image-up"><img src="/Public/images/icon-image.png" /></a>
+									<a href="#" id="music-up"><img src="/Public/images/icon-audio.png" /></a>
+									<a href="#" id="video-up"><img src="/Public/images/icon-video.png" /></a>
+									<a href="#" id="annex-up"><img src="/Public/images/icon-link.png" /></a>
+								</span>
+								-->
+								<textarea id="comment" name="description" cols="45" rows="8" aria-required="true"></textarea>
+							</p>
+							<p class="cont-media">
+								<label>Media</label>
+								<span id="image-list"></span>
+								<input type="file" id="img-item" name="image[]" multiple="multiple"/>
+								<p class="clear"></p>
 							</p>
 							<p class="form-submit">
+								<input name="art_id" value="{$data.id}" type="hidden">
 								<input name="submit" type="submit" id="submit" value="Post Comment" />
 							</p>
 						</form>
@@ -216,4 +179,39 @@
 </div>
 <!-- End Wrapper -->
 
+<script type="text/javascript">
+	$(function(){
+
+		//Upload Image
+		$("#image-up").click(function(){
+			$("input[name='image[]']").click();
+			return false;
+		});
+	
+
+		$("input[name='image[]']").change(preImg);
+
+		function preImg(source) {
+			var imgItem = document.getElementById('img-item');
+			var len = imgItem.files.length;
+
+		    if (typeof FileReader === 'undefined') {  
+		        alert('Your browser does not support FileReader...');  
+		        return;  
+		    }
+
+		    for(var i = 0; i < len; i++){
+			    var reader = new FileReader();  
+			    reader.readAsDataURL(imgItem.files[i]);
+			    reader.onload = function(){
+			    	$("#image-list").append('<img src="'+this.result+'"/>');
+			    }
+		    }
+
+		    $(".cont-media").show();
+
+		}
+
+	});  
+</script>
 <include file="Public:footer" />

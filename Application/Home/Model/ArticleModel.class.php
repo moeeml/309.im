@@ -3,8 +3,8 @@
  * @desc 文章模型
 */
 namespace Home\Model;
-use Think\Model;
-class ArticleModel extends Model {
+use Common\Model\iModel;
+class ArticleModel extends iModel {
 
     /**
      * @var array 数据过滤以及自动填充
@@ -100,11 +100,15 @@ class ArticleModel extends Model {
     /**
      * @desc 获取文章的详细内容
      * @param int $id 文章ID
-     * @return array
-     * @version 2 2014-12-11 RGray
+     * @return mix
+     * @version 3 2014-12-16 RGray
      */
     public function get_detail($id)
     {
+        if(!$this->check_param($id)){
+            return false;
+        }
+
     	$info = $this->alias('a')
                      ->field('a.*, u.real_name, u.avatar, u.honor, u.tag as utag, u.sign, u.description as user_desc')
                      ->join('LEFT JOIN user AS u ON u.id = a.user_id')
@@ -131,6 +135,8 @@ class ArticleModel extends Model {
     		}
     	}
 
+        $info['comment'] = D('comment')->get_reply();
+
     	return $info;
     }
 
@@ -153,7 +159,7 @@ class ArticleModel extends Model {
         }
 
         //插入文章信息
-        $this->user_id = 1;
+        $this->user_id = D('user')->get_uid();
         $art_id = $this->add();
 
         if(!$art_id){
@@ -169,7 +175,8 @@ class ArticleModel extends Model {
         }
 
         //媒体上传
-        $upres = $this->mediaModel->is_upload($art_id);
+        $this->mediaModel->item->art_id = $art_id;
+        $upres = $this->mediaModel->is_upload();
 
         if(!empty($upres)){
             $this->where(array('id'=>$art_id))->save(array('type'=>strtoupper($upres[0]['key'])));

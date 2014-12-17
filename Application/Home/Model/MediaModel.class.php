@@ -10,7 +10,6 @@ class MediaModel extends Model {
      * @var array 数据过滤以及自动填充
      */
     protected $_auto = array(
-            array('comm_id', 0, self::MODEL_INSERT),
             array('status', NORMAL, self::MODEL_INSERT),
             array('create_time', 'time', self::MODEL_INSERT, 'function'),
         );
@@ -30,7 +29,7 @@ class MediaModel extends Model {
     /**
      * @var object 媒体对象
      */
-    protected $item = NULL;
+    public $item = NULL;
 
     /**
      * @var type 媒体类型
@@ -46,13 +45,11 @@ class MediaModel extends Model {
 
     /**
      * @desc 处理文件上传
-     * @param int $art_id 文章ID
      * @return mix
      * @version 1 2014-11-29 RGray
      */
-    public function is_upload($art_id = null)
+    public function is_upload()
     {   
-        empty($art_id) && $art_id = I('post.art_id');
         $desc = I('post.description');
         $link = array_filter(I('post.link'));
         $limit = I('post.limit');
@@ -75,7 +72,6 @@ class MediaModel extends Model {
         //录入多媒体信息
         $res = true;
         $add_res = true;
-        $this->item->art_id = $art_id;
         $this->item->type = strtoupper($this->type);
 
         foreach ($link as $k=>$r) {

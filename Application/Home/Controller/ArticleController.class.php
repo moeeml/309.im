@@ -16,11 +16,18 @@ class ArticleController extends iController
      */
     private $mediaModel = NULL;
 
+    /**
+     * @var CommentModel 评论模型
+     */
+    private $commentModel = NULL;    
+
 	public function __construct()
 	{
 		parent::__construct();
-        $this->articleModel = D('Article');
-		$this->mediaModel = D('Media');
+
+        $this->articleModel = D('article');
+        $this->mediaModel = D('media');
+		$this->commentModel = D('comment');
 	}
 
     /**
@@ -44,7 +51,15 @@ class ArticleController extends iController
     public function article_detail()
     {
     	$art_id = I('param.art_id');
-    	$this->data = $this->articleModel->get_detail($art_id);
+
+    	$res = $this->articleModel->get_detail($art_id);
+
+        if($res){
+            $this->data = $res;
+        }else{
+            $this->type = ERROR;
+            $this->data = $this->articleModel->getError();
+        }
 
         $this->play();
     }
@@ -90,6 +105,42 @@ class ArticleController extends iController
             $this->data = $this->mediaModel->getError();
         }else{
             $this->data = $res;
+        }
+
+        $this->play();
+    }
+
+    /**
+     * @desc 获取文章评论列表
+     * @version 1 2014-12-17 RGray
+     */
+    public function replay_list()
+    {
+        $res = $this->commentModel->get_reply();
+
+        if(!$res){
+            $this->type = ERROR;
+            $this->data = $this->commentModel->getError();
+        }else{
+            $this->data = $res;
+        }
+
+        $this->play();
+    }
+
+    /**
+     * @desc 评论文章
+     * @version 1 2014-12-16 RGray
+     */
+    public function reply_article()
+    {
+        $res = $this->commentModel->insert_comment();
+
+        if(!$res){
+            $this->type = ERROR;
+            $this->data = $this->commentModel->getError();
+        }else{
+            $this->data = L('reply_success');
         }
 
         $this->play();
