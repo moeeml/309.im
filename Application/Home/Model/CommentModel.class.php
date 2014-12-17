@@ -105,7 +105,7 @@ class CommentModel extends iModel
             return false;
         }
 
-        $data = $this->field('c.*, m.*, u.*, c.create_time as create_time, u.description as user_desc, m.description as content')
+        $data = $this->field('c.*, m.*, u.*, c.create_time as reply_create_time, u.description as user_desc, m.description as content')
                      ->alias('c')
                      ->join('LEFT JOIN media AS m ON c.id = m.comm_id')
                      ->join('LEFT JOIN user AS u ON c.user_id = u.id')
@@ -125,7 +125,7 @@ class CommentModel extends iModel
                     'user_desc'=>$d['user_desc'],
                     'content'=>$d['content'],
                     'level'=>$d['level'],
-                    'create_time'=>$d['create_time'],
+                    'create_time'=>$d['reply_create_time'],
                 );
         }
 
