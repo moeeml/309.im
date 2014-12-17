@@ -120,7 +120,7 @@ class ArticleModel extends iModel {
 
         //查找对应媒体
         $mfield = 'id,description,link,type,status,limit,width,height,size';
-    	$media = $this->mediaModel->where(array('art_id'=>$id))->field($mfield)->select();
+    	$media = $this->mediaModel->where(array('art_id'=>$id, 'comm_id'=>0))->field($mfield)->select();
 
     	foreach ($media as $m) {
 

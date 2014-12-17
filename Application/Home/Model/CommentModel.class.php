@@ -76,7 +76,6 @@ class CommentModel extends iModel
         }
 
         $this->mediaModel->comm_id = $comm_id;
-        $this->mediaModel->art_id = $art_id;
 
         $this->mediaModel->type = TEXT;
         $replycont_id = $this->mediaModel->add();
@@ -87,7 +86,6 @@ class CommentModel extends iModel
 
         //媒体上传
         $this->mediaModel->item->comm_id = $comm_id;
-        $this->mediaModel->item->art_id = $art_id;
         $up_res = $this->mediaModel->is_upload();
 
         return $comm_id;
