@@ -94,7 +94,9 @@ class ArticleModel extends iModel {
         return $this->alias('a')
                     ->field('a.*, u.real_name, u.avatar')
                     ->join('LEFT JOIN user AS u ON u.id = a.user_id')
-                    ->where($where)->select();
+                    ->where($where)
+                    ->order('a.create_time desc')
+                    ->select();
     }
 
     /**
