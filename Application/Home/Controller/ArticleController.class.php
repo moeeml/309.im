@@ -16,57 +16,79 @@ class ArticleController extends iController
      */
     private $mediaModel = NULL;
 
+    /**
+     * @var CommentModel 评论模型
+     */
+    private $commentModel = NULL;    
+
 	public function __construct()
 	{
 		parent::__construct();
-        $this->articleModel = D('Article');
-		$this->mediaModel = D('Media');
-	}
 
-    public function index()
-    {
-        $this->display();
-    }
+        $this->articleModel = D('article');
+        $this->mediaModel = D('media');
+		$this->commentModel = D('comment');
+	}
 
     /**
      * @desc 文章列表
      * @version 1 2014-11-11 RGray
      */
-    public function articleModel_list()
+    public function article_list()
     {
-    	$this->data = $this->articleModel->get_list();
-    	
-    	$this->json_back();
+        $page = I('param.page', 1, 'intval');
+        $this->assign('page', $page + 1);
+
+        $this->data = $this->articleModel->get_list();
+
+    	$this->play();
     }
 
     /**
      * @desc 文章详细内容
      * @version 1 2014-11-11 RGray
      */
-    public function articleModel_detail()
+    public function article_detail()
     {
-    	$art_id = I('post.art_id');
-    	$this->data = $this->articleModel->get_detail($art_id);
+    	$art_id = I('param.art_id');
 
-        $this->json_back();
+    	$res = $this->articleModel->get_detail($art_id);
+
+        if($res){
+            $this->data = $res;
+        }else{
+            $this->type = ERROR;
+            $this->data = $this->articleModel->getError();
+        }
+
+        $this->play();
     }
 
     /**
      * @desc 发布文章
      * @version 1 2014-11-11 RGray
      */
-    public function publish_articleModel()
+    public function publish_article()
     {
-        $act_id = $this->articleModel->insert_articleModel();
+        $act_id = $this->articleModel->insert_article();
 
         if(!$act_id){
             $this->type = ERROR;
-            $this->message = $this->articleModel->message;
+            $this->data = $this->articleModel->message;
         }else{
-            $this->data = L('publish_articleModel_success', array('insert_id'=>$act_id));
+            $this->data = L('publish_article_success', array('insert_id'=>$act_id));
         }
 
-        $this->json_back();
+        $this->play();
+    }
+
+    /**
+     * @desc 发布文章页
+     * @version 1 2014-12-12 RGray
+     */
+    public function show_publish_article()
+    {
+        $this->play();
     }
 
 
@@ -74,18 +96,54 @@ class ArticleController extends iController
      * @desc 上传多媒体
      * @version 1 2014-12-1 RGray
      */
-    public function upload_mediaModel()
+    public function upload_media()
     {
         $res = $this->mediaModel->is_upload();
         
         if(!$res){
             $this->type = ERROR;
-            $this->message = $this->mediaModel->getError();
+            $this->data = $this->mediaModel->getError();
         }else{
             $this->data = $res;
         }
 
-        $this->json_back();
+        $this->play();
+    }
+
+    /**
+     * @desc 获取文章评论列表
+     * @version 1 2014-12-17 RGray
+     */
+    public function replay_list()
+    {
+        $res = $this->commentModel->get_reply();
+
+        if(!$res){
+            $this->type = ERROR;
+            $this->data = $this->commentModel->getError();
+        }else{
+            $this->data = $res;
+        }
+
+        $this->play();
+    }
+
+    /**
+     * @desc 评论文章
+     * @version 1 2014-12-16 RGray
+     */
+    public function reply_article()
+    {
+        $res = $this->commentModel->insert_comment();
+
+        if(!$res){
+            $this->type = ERROR;
+            $this->data = $this->commentModel->getError();
+        }else{
+            $this->data = L('reply_success');
+        }
+
+        $this->play();
     }
 
     public function test()

@@ -1,0 +1,115 @@
+<include file="Public:header" />
+
+<!-- Begin Wrapper -->
+<div class="wrapper">
+
+<!-- Begin Blog Grid -->
+<div class="blog-wrap">
+  <!-- Begin Blog -->
+  <div class="blog-grid">
+
+  <volist name="data" id="item">
+    <switch name="item.type">
+    <case value="IMAGE">
+    <!-- Begin Image Format -->
+    <div class="post format-image box"> 
+      <div class="frame">
+        <a href="/Home/art/art_id/{$item.id}">
+          <img src="{$item.image}" />
+        </a>
+      </div>
+      <h2 class="title"><a href="/Home/art/art_id/{$item.id}">{$item.title}</a></h2>
+      <p>{$item.summary}</p>
+      <div class="details">
+        <span class="icon-image">{$item.create_time|date="F j, Y, g:i a",###}</span>
+        <span class="likes"><a class="likeLink">{$item.dig}</a></span>
+        <span class="comments">{$item.reply}</span>
+      </div>
+    </div>
+    <!-- End Image Format -->
+    </case>
+
+    <case value="VIDEO">
+    <!-- Begin Video Format -->
+    <div class="post format-video box"> 
+      <div class="video frame"><iframe src="{$item.video}" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+      <h2 class="title"><a href="/Home/art/art_id/{$item.id}">{$item.title}</a></h2>
+      <p>{$item.summary}</p>
+    
+      <div class="details">
+        <span class="icon-video">{$item.create_time|date="F j, Y, g:i a",###}</span>
+        <span class="likes"><a class="likeLink">{$item.dig}</a></span>
+        <span class="comments">{$item.reply}</span>
+      </div>
+      
+    </div>
+    <!-- End Video Format -->
+    </case>           
+
+    <case value="MUSIC">
+    <!-- Begin Audio Format -->
+    <div class="post format-audio box"> 
+      <div class="audio-wrapper">
+        <div class="clear"></div>
+        <div class="audio">
+          <audio controls="" preload="none" src="{$item.music}"></audio>
+        </div>
+      </div>
+      <h2 class="title"><a href="/Home/art/art_id/{$item.id}">{$item.title}</a></h2>
+      <p>{$item.summary}</p>
+
+      <div class="details">
+        <span class="icon-audio">{$item.create_time|date="F j, Y, g:i a",###}</span>
+        <span class="likes"><a class="likeLink">{$item.dig}</a></span>
+        <span class="comments">{$item.reply}</span>
+      </div>
+  
+    </div>
+    <!-- End Audio Format -->           
+    </case>
+      
+    <case value="TEXT">  
+    <!-- Begin Standard Format -->
+    <div class="post format-standard box"> 
+
+      <h2 class="title"><a href="/Home/art/art_id/{$item.id}">{$item.title}</a></h2>
+      <p>{$item.summary}</p>
+  
+      <div class="details">
+        <span class="icon-standard">{$item.create_time|date="F j, Y, g:i a",###}</span>
+        <span class="likes"><a class="likeLink">{$item.dig}</a></span>
+        <span class="comments">{$item.reply}</span>
+      </div>
+  
+    </div>
+    <!-- End Standard Format -->
+    </case>
+    </switch>    
+  </volist>
+  </div>
+  <!-- End Blog -->
+</div>
+<!-- End Blog Grid -->
+
+<!-- Begin Page-navi -->
+    <div id="navigation">
+      <div class="nav-previous">
+        <if condition="$page eq 2">
+          <a href="{$Think.server.request_uri}/page/2">
+        <else />
+          <a href="{$page}">  
+        </if>
+        
+        <span class="meta-nav-prev">&larr; Older posts</span>
+        </a>
+      </div>
+      <!-- 
+      <div class="nav-next"><a href="#" ><span class="meta-nav-next">Newer posts &rarr;</span></a></div>
+       --> 
+    </div>
+    <!-- End Page-navi --> 
+
+</div>
+<!-- End Wrapper -->
+
+<include file="Public:footer" />

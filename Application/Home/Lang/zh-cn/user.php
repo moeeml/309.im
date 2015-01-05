@@ -10,4 +10,7 @@ return array(
         'password_wrong' => '密码错误，ahoahoaho',
         'name_exist' => '用户名已存在，Oh My miao，:(>_<):',
         'name_enable' => '卖身契可用√get',
+        'avatar_upload_success' => '头像上传comlpeted，战斗力提升一百万',
+        'avatar_cutdown_success' => '头像裁剪成功，瞬间mo到爆炸！',
+        'avatar_empty' => '头像不可用，啊咧咧咧',
     );

@@ -5,17 +5,24 @@ return array(
 
 	//路由规则
 	'URL_ROUTE_RULES'=>array(
-		'test'			=>	'Article/test',
-		'art-list'		=>	'Article/article_list',
-		'art'			=>	'Article/article_detail',
-		'art-pub'		=>	'Article/publish_article',
-		'media-up'		=>	'Article/upload_media',
-		'login'			=>	'User/login',
-		'name-check'	=>	'User/check_username_unique',
-		'register'		=>	'User/register',
-		'uinfo-view'	=>	'User/view_userinfo',
-		'uinfo-edit'	=>	'User/edit_userinfo',
-	),
+		'test'					=>	'Article/test',
+		'art-list'				=>	'Article/article_list',
+		'art'					=>	'Article/article_detail',
+		'art-pub'				=>	'Article/publish_article',
+		'art-reply'				=>	'Article/reply_article',
+		'art4pub'				=>	'Article/show_publish_article',
+		'art-reply-list'		=>	'Article/replay_list',
+		'media-up'				=>	'Article/upload_media',
+		'login'					=>	'User/login',
+		'name-check'			=>	'User/check_username_unique',
+		'register'				=>	'User/register',
+		'reg'					=>	'User/show_register',
+		'uinfo-view'			=>	'User/view_userinfo',
+		'uinfo-edit'			=>	'User/edit_userinfo',
+		'avatar-up'				=>	'User/add_avatar',
+		'avatar-fix'			=>	'User/fix_avatar',
+		'img-resize'			=>	'Image/resize_image',
+	),	
 
 	//上传允许类型
 	'UPLOAD_EXT'		=> array(

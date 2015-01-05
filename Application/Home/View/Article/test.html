@@ -41,4 +41,28 @@ USERINFO EDIT:
 </form>
 
 
+AVATAR UPLOAD:
+<br/>
+<form action="/Home/avatar-up" method="post" enctype="multipart/form-data">
+	Avatar:<input type="file" name="image[]" />
+	<input type="submit" name="sub" />
+</form>
+
+
+IMAGE RESIZE:
+<br/>
+<form action="/Home/img-resize" method="post" enctype="multipart/form-data">
+	Url:<input type="text" name="url" />
+	Width:<input type="text" name="width" />
+	<input type="submit" name="sub" />
+</form>
+
+MEDIA UPLOAD:
+<br/>
+<form action="/Home/media-up" method="post" enctype="multipart/form-data">
+	Art_id:<input type="text" name="art_id" />
+	File:<input type="file" name="music[]" />
+	<input type="submit" name="sub" />
+</form>
+
 

@@ -3,9 +3,9 @@
  * @desc 用户模型
 */
 namespace Home\Model;
-use Think\Model;
+use Common\Model\iModel;
 use Common\Model\encryptModel;
-class UserModel extends Model{
+class UserModel extends iModel{
     /**
      * @var array 自动验证
      */
@@ -22,6 +22,11 @@ class UserModel extends Model{
      * @var bool 批量验证
      */
     protected $userInfoModel = NULL;
+
+    /**
+     * @var MediaModel 媒体模型
+     */
+    public $mediaModel = NULL;
 
 	public function __construct()
 	{
@@ -72,7 +77,12 @@ class UserModel extends Model{
 		$name = I('post.name');
 		$password = I('post.password');
 
-		$linfo = $this->field('id, name, password')->where(array('name'=>$name))->find();
+		if(!$this->check_param(array($name, $password))){
+			$this->message = $this->getError();
+			return false;
+		}
+
+		$linfo = $this->field('id, name, password, avatar')->where(array('name'=>$name))->find();
 
 		//用户名不存在
 		if(empty($linfo)){
@@ -86,33 +96,49 @@ class UserModel extends Model{
 			return false;
 		}
 
-		return $linfo['id'];
+		return $linfo;
 	}
 
 	/**
 	 * @desc 检查用户名是否存在
+	 * @param string $name 用检查的用户名
+	 * @param bool $flag 是否检测昵称
 	 * @return bool
-	 * @version 1 2014-12-03 RGray
+	 * @version 3 2014-12-13 RGray
 	*/
-	public function check_name()
+	public function check_name($name, $flag = false)
 	{
-		$name = I('post.name');
+		empty($name) && $name = I('post.name');
+
+		if(!$this->check_param($name)){return false;}
+
 		$id = $this->get_uid();
 
 		if($id){
 			$where['id'] = array('neq', $id);
 		}
 
-		$where['name'] = array('eq', $name);
+		//选择筛选用户账号或者用户名
+		if(!$flag){
+			$where['name'] = array('eq', $name);
+		}else{
+			$where['real_name'] = array('eq', $name);
+		}
+
 		$res = $this->field('id')->where($where)->find();
 
-		return (bool)!$res;
+		if(!empty($res)){
+			$this->error = L('name_exist');
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
 	 * @desc 录入用户注册信息
 	 * @return mix
-	 * @version 1 2014-12-03 RGray
+	 * @version 2 2014-12-12 RGray
 	*/
 	public function insert_user()
 	{
@@ -137,7 +163,12 @@ class UserModel extends Model{
 		}
 
 		//录入数据
-		$this->userInfoModel->add(array('id'=>$ares));
+		$uid = $this->userInfoModel->add(array('id'=>$ares));
+
+		//初始化userinfo session
+		if(!empty($uid)){
+			session('user_info', array('user_id'=>$uid));
+		}
 
 		return true;
 	}
@@ -163,14 +194,14 @@ class UserModel extends Model{
 	/**
 	 * @desc 更新用户信息
 	 * @return bool
-	 * @version 1 2014-12-03 RGray
+	 * @version 2 2014-12-11 RGray
 	*/
 	public function update_userinfo()
 	{
 		$id = $this->get_uid();
 
 		//检查用户名唯一
-		if(!$this->check_name()){
+		if(!$this->check_name(I('param.real_name'), true)){
 			$this->message = L('name_exist');
 			return false;
 		}
@@ -187,9 +218,80 @@ class UserModel extends Model{
 		}
 
 		//更新数据
-		$this->password = EncryptModel::enpass($this->password);
+		!empty($this->password) && $this->password = EncryptModel::enpass($this->password);
+		!empty($this->userInfoModel->birthday) && $this->userInfoModel->birthday = strtotime($this->userInfoModel->birthday);
 		$this->where(array('id'=>$id))->save();
 		$this->userInfoModel->where(array('id'=>$id))->save();
+		return true;
+	}
+
+	/**
+	 * @desc 上传用户头像
+	 * @return mix
+	 * @version 1 2014-12-04 RGray
+	*/
+	public function update_avatar()
+	{
+		$user_id = $this->get_uid();
+
+		//上传图片
+		$this->mediaModel = D('media');
+		$config = $this->mediaModel->trans_upload_config();
+		$config['savePath'] = './'.AVATAR_PATH;
+		$upload = new \Think\Upload($config);
+		$up_res = $upload->upload();
+
+		if(!$up_res){
+			$this->error = $upload->getError();
+			return false;
+		}
+
+		//录入数据
+		$data['avatar'] = UPLOAD_PATH.str_replace('./', '', $up_res[0]['savepath']).$up_res[0]['savename'];
+
+		if(!$this->create($data)){
+			return false;
+		}
+
+		return $this->where(array('id'=>$user_id))->save();
+	}
+
+	/**
+	 * @desc 刷新用户信息
+	 * @version 1 2014-12-12 RGray
+	*/
+	public function fresh_userinfo()
+	{
+		$user_info = $this->get_userinfo_detail();
+		$this->log_userinfo($user_info);
+	}
+
+	/**
+	 * @desc 裁剪用户头像
+	 * @return bool
+	 * @version 1 2014-12-12 RGray
+	*/
+	public function cutdown_avatar()
+	{
+		$user_info = $this->get_userinfo_detail();
+		$avatar = $user_info['avatar'];
+
+		if(empty($avatar)){
+			$this->error = L('avatar_empty');
+			return false;
+		}
+
+		$image = new \Think\Image();
+		$image->open('.'.$avatar);
+
+		$radio =  number_format($image->width() / I('param.width'), 1);
+		$crop_width = I('param.x2') * $radio;
+		$crop_height = I('param.y2') * $radio;
+		$origin_width = I('param.x') * $radio;
+		$origin_height = I('param.y') * $radio;
+
+		$image->crop($crop_width, $crop_height, $origin_width, $origin_height)->save('.'.$avatar);
+
 		return true;
 	}
 }

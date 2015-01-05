@@ -39,18 +39,18 @@ class UserController extends iController
 
 		if(!$res){
 			$this->type = ERROR;
-			$this->message = $this->userModel->message;
+			$this->data = $this->userModel->message;
 		}else{
 			$this->data = L('login_success');
-			$this->userModel->log_userinfo(array('user_id'=>$res));
+			$this->userModel->log_userinfo(array('user_id'=>$res['id'], 'avatar'=>$res['avatar']));
 		}
 
-		$this->json_back();
+		$this->play();
 	}
 
 	/**
 	 * @desc 检查用户名是否唯一
-	 * @version 1 2014-12-03 RGray
+	 * @version 2 2014-12-12 RGray
 	*/
 	public function check_username_unique()
 	{
@@ -58,12 +58,21 @@ class UserController extends iController
 
 		if(!$res){
 			$this->type = ERROR;
-			$this->message = L('name_exist');
+			$this->data = $this->userModel->getError();
 		}else{
 			$this->data = L('name_enable');
 		}
 
-		$this->json_back();
+		$this->play();
+	}
+
+	/**
+	 * @desc 显示用户注册页
+	 * @version 1 2014-12-12 RGray
+	*/
+	public function show_resgister()
+	{
+		$this->play();
 	}
 
 	/**
@@ -76,13 +85,12 @@ class UserController extends iController
 
 		if(!$res){
 			$this->type = ERROR;
-			$this->message = $this->userModel->getError();
+			$this->data = $this->userModel->getError();
 		}else{
 			$this->data = L('register_success');
-			$this->userModel->log_userinfo(array('user_id'=>$res));
 		}
 
-		$this->json_back();
+		$this->play();
 	}
 
 	/**
@@ -94,7 +102,7 @@ class UserController extends iController
 		$this->type = DATA;
 		$this->data = $this->userModel->get_userinfo_detail();
 
-		$this->json_back();
+		$this->play();
 	}
 
 	/**
@@ -107,12 +115,12 @@ class UserController extends iController
 
 		if(!$res){
 			$this->type = ERROR;
-			$this->message = $this->userModel->message;
+			$this->data = $this->userModel->message;
 		}else{
 			$this->data = L('userinfo_update_success');
 		}
 
-		$this->json_back();
+		$this->play();
 	}
 
 	/**
@@ -121,6 +129,35 @@ class UserController extends iController
 	*/
 	public function add_avatar()
 	{
+		$res = $this->userModel->update_avatar();
 
+		if(!$res){
+			$this->type = ERROR;
+			$this->data = $this->userModel->getError();
+		}else{
+			$this->data = L('avatar_upload_success');
+			$this->userModel->fresh_userinfo();
+		}
+
+		$this->play();
+	}
+
+	/**
+	 * @desc 裁剪用户头像
+	 * @version 1 2014-12-12 RGray
+	*/
+	public function fix_avatar()
+	{
+		$res = $this->userModel->cutdown_avatar();
+
+		if(!$res){
+			$this->type = ERROR;
+			$this->data = $this->userModel->getError();
+		}else{
+			$this->data = L('avatar_cutdown_success');
+			$this->userModel->fresh_userinfo();
+		}
+
+		$this->play();		
 	}
 }

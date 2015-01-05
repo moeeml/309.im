@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>喵了个咪</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	</head>
+	<body>
+		<if condition="$flag eq 'DATA'">
+		{:L('media_upload_success')}
+		<volist name="data" id="item">
+			<p>key:{$item.key}</p>
+			<p>name:{$item.name}</p>
+			<p>type:{$item.type}</p>
+			<p>size:{$item.size}</p>
+			<p>ext:{$item.ext}</p>
+			<p>md5:{$item.md5}</p>
+			<p>sha1:{$item.sha1}</p>
+			<p>savename:{$item.savename}</p>
+			<p>savepath:{$item.savepath}</p>
+			<p>-----------------</p>
+		</volist>
+		<else />
+			{$data}
+		</if>
+	</body>
+</html>
